@@ -1,0 +1,50 @@
+<mat-toolbar class="toolbar">
+  <h1>Statistiques</h1>
+  <form class="form" (ngSubmit)="getStudents()">
+    <mat-form-field>
+      <mat-select [formControl]="sortCriteria" (selectionChange)="reloadStudents()">
+        <mat-option value="lowToHigh">Temps Croissant</mat-option>
+        <mat-option value="highToLow">Temps Décroissant</mat-option>
+        <mat-option value="alphabetical">Alphabétique</mat-option>
+        <mat-option value="unAlphabetical">Inverse alphabétique</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input type="text" placeholder="Trouvez un stagiaire" matInput [formControl]="myControlSearch" [matAutocomplete]="auto">
+      <button class="clear has-text-white" mat-button mat-icon-button matSuffix (click)="clearSearchField()" *ngIf="myControlSearch.value">×</button>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+</mat-toolbar>
+
+<div>
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let s of shownStudents" (opened)="getStudentClock(s.hash)" (closed)="stopTimeline()">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{s.firstname}} {{s.lastname}}
+        </mat-panel-title>
+        <mat-panel-description [ngClass]="{'performedTime': true, 'negativeTime': s.performedTime < -(0.1/12), 'positiveTime': s.performedTime >= -(0.1/12) }">
+          Temps validé: {{convertTime(s.performedTime)}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <ng-template matExpansionPanelContent>
+        <form>
+          <mat-form-field>
+            <mat-label>Choisir une date</mat-label>
+            <input matInput [matDatepicker]="myDatePicker" [formControl]="date" [matDatepickerFilter]="calendarFilter"  (dateChange)="dateSelect(s.hash)">
+            <mat-datepicker-toggle matSuffix [for]="myDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #myDatePicker></mat-datepicker>
+          </mat-form-field>
+          <p class="performedTime">Temps effectué ce jour {{convertTime(dayPerformedTime)}} </p>
+        </form>
+        <div id="{{s.hash}}" *ngIf="clocksExist"></div>
+        <p *ngIf="!clocksExist"> Pas de timbrages pour ce jour</p>
+      </ng-template>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

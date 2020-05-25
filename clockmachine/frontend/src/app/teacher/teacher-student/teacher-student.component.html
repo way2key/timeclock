@@ -1,0 +1,60 @@
+<div>
+  <mat-toolbar class="toolbar">
+    <form class="form">
+      <mat-form-field class="search">
+        <input type="text" placeholder="Trouvez un stagiaire"
+               matInput
+               [formControl]="myControl"
+               [matAutocomplete]="auto"
+               [(ngModel)]="searchField">
+        <button class="clear has-text-white" mat-button mat-icon-button matSuffix (click)="clearSearchField()" *ngIf="searchField">×</button>
+       <mat-autocomplete #auto="matAutocomplete">
+         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+           {{option}}
+         </mat-option>
+       </mat-autocomplete>
+     </mat-form-field>
+   </form>
+    <div class="buttons has-addons">
+      <button class="button is-success" (click)="modifyTime()" [disabled]="onCheckBox()">Modifier le temps</button>
+      <button class="button is-primary"(click)="modifyPresence()" [disabled]="onCheckBox()">Modifier la présence</button>
+      <button class="button is-info" (click)="assignWeek()" [disabled]="onCheckBox()">Attribuer une semaine</button>
+      <button class="button is-link" (click)="modifyHash()" [disabled]="onCheckBox()">Modifier le hash</button>
+      <button class="button is-danger" (click)="deleteStudent()" [disabled]="onCheckBox()"> Supprimer </button>
+      <button class="button" id="allButton" (click)="onAll()">Tout sélectionner</button>
+      <button class="button is-info " id="allButton" (click)="ngOnInit()">
+        <i class="fas fa-sync"></i>
+      </button>
+    </div>
+  </mat-toolbar>
+</div>
+
+<div>
+  <h1>Liste des stagiaires</h1>
+  <div>
+    <ng-container *ngFor="let s of shownStudents">
+      <div class="student" (click)="s.isSelected=!s.isSelected">
+        <div class="student-info">
+          <div class="icons">
+            <i *ngIf="s.status"     class="fas fa-check fa-2x p"></i>
+            <i *ngIf="!s.status"    class="fas fa-coffee fa-2x np"></i>
+            <i *ngIf="s.presence"   class="fas fa-calendar-check fa-2x p"></i>
+            <i *ngIf="!s.presence"  class="fas fa-calendar-times fa-2x np"></i>
+          </div>
+          <div class="name">
+            <h1>{{s.firstname}} {{s.lastname}}</h1>
+          </div>
+          <div class="time">
+            <p [ngClass]="{'performedTime': true, 'negativeTime': s.performedTime < -(0.1/12), 'positiveTime': s.performedTime >= -(0.1/12) }"> {{convertTime(s.performedTime)}} </p>
+          </div>
+          <div class="week">
+            <p> {{getWeekName(s.weekId)}}</p>
+          </div>
+          <div class="hash">
+            <p>{{s.hash}}</p>
+          </div>
+        </div>
+        <mat-checkbox class="checkbox" [checked]="s.isSelected" [id]="s.hash"></mat-checkbox>
+      </div>
+    </ng-container>
+</div>

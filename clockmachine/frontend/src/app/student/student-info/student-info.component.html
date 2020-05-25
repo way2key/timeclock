@@ -1,0 +1,29 @@
+<div *ngIf="message==0">
+  <h1>Utilisateur inexistant ❗</h1>
+  <i class="fas fa-bug"></i>
+</div>
+
+<div *ngIf="message==1">
+  <h1 mat-dialog-title>Informations</h1>
+  <div mat-dialog-content>
+    <mat-divider></mat-divider>
+    <br>
+    <div class="student">
+      <h1 class="main-title">{{ student.firstname }} {{ student.lastname }}</h1>
+      <span *ngIf = "status" class="tag is-success is-large" >IN</span>
+      <span *ngIf = "!status" class="tag is-danger is-large" >OUT</span>
+    </div>
+    <mat-divider></mat-divider>
+    <app-student-timeline></app-student-timeline>
+    <mat-divider></mat-divider>
+    <p> Temps validé: {{ dayTime }} </p>
+    <p>{{ meal? "Vous avez déjà mangé" : "Vous n'avez pas encore mangé"}}</p>
+    <p>{{ breather? "Vous avez pris une pause" : "Vous n'avez pas pris de pause"}}</p>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close class="button is-info has-text-white">
+      <i class="fas fa-arrow-alt-circle-left fa-2x"></i>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+.modal {
+  position: relative;
+}
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: auto;
+  margin: auto;
+}
+
+.poolStudent {
+  display: flex;
+  flex-direction: row;
+  margin-left: 2em;
+  margin-right: 2em;
+}
+
+.name {
+  width: 50%;
+}
+
+.action {
+  width: 30%;
+}
+
+.pool {
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  overflow: auto;
+}
+
+.myTitle {
+  margin: 1em;
+  margin-top:2em;
+}
+.allot {
+  display: flex;
+  flex-direction: column;
+}
+
+.machineStudent {
+  display: flex;
+  flex-flow: row wrap;
+  height: 200px;
+  overflow: auto;
+}
+
+.student {
+  display: flex;
+  flex-direction: row;
+  width: 25%;
+}

@@ -1,0 +1,36 @@
+<div>
+  <form class="form">
+    <mat-toolbar class="toolbar">
+      <mat-form-field class="search">
+        <input type="text" placeholder="Trouvez un stagiaire" matInput [formControl]="interaction" [matAutocomplete]="auto" >
+        <button class="clear has-text-white" mat-button mat-icon-button matSuffix (click)="clearSearchField()" *ngIf="searchField">×</button>
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <div>
+        <input type="file" class="button is-light" accept="text/csv" (change)="onFileSelect($event)">
+        <button class="button is-light" (click)="importStudent()">Importer les stagiaires</button>
+        <button class="button is-info" (click)="allotStudent()">Répartir les stagiaires</button>
+        <button class="button is-danger" (click)="deleteAllStudent()">Réinitialisation</button>
+      </div>
+    </mat-toolbar>
+  </form>
+</div>
+
+<div>
+  <br>
+  <br>
+  <h1>Liste des stagiaires</h1>
+  <div class="student">
+    <ng-container *ngFor="let s of shownStudents">
+      <div class="student-info">
+        <h1 matSubheader>{{s.firstname}} {{s.lastname}}</h1>
+        <div>
+          <p>{{s.hash}}</p>
+        </div>
+      </div>
+    </ng-container>
+</div>

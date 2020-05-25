@@ -1,0 +1,31 @@
+<h1> Gestion des Enseignants </h1>
+
+<form [formGroup]="teacherForm" (ngSubmit)="createTeacher()">
+  <mat-form-field>
+    <mat-label>Prénom</mat-label>
+    <input matInput formControlName="firstname">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Nom</mat-label>
+    <input matInput formControlName="lastname">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Mot de passe</mat-label>
+    <input matInput formControlName="password">
+  </mat-form-field>
+  <button type="submit" class="button is-success"><i class="fas fa-user-plus"></i></button>
+</form>
+
+<h2>Enseignant existants</h2>
+<div class="teacher">
+  <div *ngFor="let t of teachers">
+    <div class="name">
+      {{t.firstname + " " + t.lastname}}
+    </div>
+    <div class="action">
+      <button type="button" class="button is-danger" (click)="deleteTeacher(t._id)"><i class="fas fa-trash"></i></button>
+    </div>
+  </div>
+</div>

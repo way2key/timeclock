@@ -1,0 +1,89 @@
+<div class="data">
+  <h1>Créer des vacances et jours fériés</h1>
+</div>
+<form [formGroup]="holidayForm" (ngSubmit)="createHoliday()">
+  <div class="create">
+    <div class="choice">
+      <p>Jours fériés</p>
+      <mat-slide-toggle [(ngModel)]="choice"  [ngModelOptions]="{standalone:true}"></mat-slide-toggle>
+      <p>Vacances</p>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="date">
+      <div class="start">
+        <mat-form-field>
+          <mat-label>Start</mat-label>
+          <input matInput [matDatepicker]="dpStart" formControlName="startDate" disabled>
+          <mat-datepicker-toggle matSuffix [for]="dpStart"></mat-datepicker-toggle>
+          <mat-datepicker #dpStart disabled="false"></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="end" *ngIf="choice">
+        <mat-form-field>
+          <mat-label>End</mat-label>
+          <input matInput [matDatepicker]="dpEnd" formControlName="endDate" disabled>
+          <mat-datepicker-toggle matSuffix [for]="dpEnd"></mat-datepicker-toggle>
+          <mat-datepicker #dpEnd disabled="false"></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div class="name">
+    <h2>Titre</h2>
+    <mat-form-field>
+      <input matInput placeholder="intitulé" formControlName="title">
+    </mat-form-field>
+  </div>
+  <div class="presence">
+    <h2>Présence autorisée</h2>
+    <mat-slide-toggle formControlName="allowPresence"></mat-slide-toggle>
+  </div>
+  <button mat-fab color="warn" type="submit">✚</button>
+</form>
+<mat-divider></mat-divider>
+<div class="data">
+  <h1>Congés existants:</h1>
+  <div class="existingHolidays">
+    <div class="vacation">
+      <h2 class="title">Vacances</h2>
+      <div *ngFor="let holiday of holidays">
+        <div *ngIf="holiday.startDate!=holiday.endDate" class="holiday">
+          <div class="hTitle">
+            <p>{{holiday.title}}</p>
+          </div>
+          <div class="hStartDate">
+            <p>{{holiday.startDate}}</p>
+          </div>
+          <div class="hEndDate">
+            <p>{{holiday.endDate}}</p>
+          </div>
+          <div class="hAllowPresence">
+            <p>{{holiday.allowPresence}}</p>
+          </div>
+          <button type="button" class="button is-danger" (click)="deleteHoliday(holiday._id)"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="holidays">
+      <h2 class="title">Jour férié</h2>
+      <div *ngFor="let holiday of holidays">
+        <div *ngIf="holiday.startDate==holiday.endDate" class="holiday">
+          <div class="hTitle">
+            <p>{{holiday.title}}</p>
+          </div>
+          <div class="hStartDate">
+            <p>{{holiday.startDate}}</p>
+          </div>
+          <div class="hEndDate">
+            <p>{{holiday.endDate}}</p>
+          </div>
+          <div class="hAllowPresence">
+            <p>{{holiday.allowPresence}}</p>
+          </div>
+          <button type="button" class="button is-danger" (click)="deleteHoliday(holiday._id)"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

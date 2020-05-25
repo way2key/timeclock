@@ -1,0 +1,93 @@
+<form [formGroup]="weekForm" (ngSubmit)="submitWeek()">
+  <div class="week">
+    <div class="day">
+      <h1>Lundi</h1>
+      <mat-form-field appearance='outline'>
+        <mat-select formControlName="monday">
+          <mat-option *ngFor="let tp of timeplans" [value]="tp._id">
+            {{tp.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="day">
+      <h1>Mardi</h1>
+      <mat-form-field appearance='outline'>
+        <mat-select formControlName="tuesday">
+          <mat-option *ngFor="let tp of timeplans" [value]="tp._id">
+            {{tp.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="day">
+      <h1>Mercredi</h1>
+      <mat-form-field appearance='outline'>
+        <mat-select formControlName="wednesday">
+          <mat-option *ngFor="let tp of timeplans" [value]="tp._id">
+            {{tp.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="day">
+      <h1>Jeudi</h1>
+      <mat-form-field appearance='outline'>
+        <mat-select formControlName="thursday">
+          <mat-option *ngFor="let tp of timeplans" [value]="tp._id">
+            {{tp.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="day">
+      <h1>Vendredi</h1>
+      <mat-form-field appearance='outline'>
+        <mat-select formControlName="friday">
+          <mat-option *ngFor="let tp of timeplans" [value]="tp._id">
+            {{tp.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="day">
+      <h1>Samedi</h1>
+      <mat-form-field appearance='outline'>
+        <mat-select formControlName="saturday">
+          <mat-option *ngFor="let tp of timeplans" [value]="tp._id">
+            {{tp.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="day">
+      <h1>Dimanche</h1>
+      <mat-form-field appearance='outline'>
+        <mat-select formControlName="sunday">
+          <mat-option *ngFor="let tp of timeplans" [value]="tp._id">
+            {{tp.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="control">
+    <h2> Intitulé </h2>
+    <mat-form-field appearance="fill">
+      <input matInput type="text" formControlName="name">
+    </mat-form-field>
+    <button mat-fab color="warn" type="submit" [disabled]="!weekForm.valid">✚</button>
+  </div>
+</form>
+<mat-divider></mat-divider>
+<h1>Existing Week</h1>
+<div class="week">
+  <div *ngFor="let week of weeks">
+    <div class="existingWeek">
+      <h3>{{week.name}}</h3>
+      <div class="action">
+        <button type="button" class="button is-danger" (click)="deleteWeek(week._id)"><i class="fas fa-trash"></i></button>
+      </div>
+    </div>
+  </div>
+</div>

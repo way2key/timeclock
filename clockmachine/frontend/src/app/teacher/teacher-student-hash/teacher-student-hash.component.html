@@ -1,0 +1,5 @@
+<p>Entrez le nouveau Hash ici</p>
+<mat-form-field appearance='outline'>
+  <input matInput type="text" [formControl]="hash">
+</mat-form-field>
+<button [mat-dialog-close]="true" type="button" class="button is-success" (click)="updateHash()"><i class="fas fa-check"></i></button>

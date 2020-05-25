@@ -1,0 +1,32 @@
+<div class="centered-content">
+  <div class="login-box">
+    <form [formGroup]="loginForm" (ngSubmit)="logAdminIn()">
+      <h1 class="title has-text-dark">Interface Administrateur</h1>
+      <div class="field">
+        <p class="control has-icons-left">
+          <input class="input has-background-light" type="text" placeholder="Username" formControlName="username">
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+        </p>
+      </div>
+      <div class="field">
+        <p class="control has-icons-left">
+          <input class="input has-background-light" type="password" placeholder="Password" formControlName="password">
+          <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+        </p>
+      </div>
+      <div>
+          <button class="button is-dark has-text-white is-pulled-right" type="submit" [disabled]="!loginForm.valid">
+            <i class="fas fa-sign-in-alt"></i>
+          </button>
+        <mat-card-content *ngIf ="incorrectPassword" class="error is-pulled-left">
+          Username or password incorrect
+        </mat-card-content>
+      </div>
+      <div *ngIf ="incorrectPassword" style="text-align:bottom"></div>
+    </form>
+  </div>
+</div>

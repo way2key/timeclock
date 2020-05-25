@@ -1,0 +1,8 @@
+<p>Choissisez un horaire</p>
+<mat-form-field appearance='outline'>
+  <mat-select [(ngModel)]="selectedWeek" (selectionChange)="updateStudentWeek()">
+    <mat-option *ngFor="let week of weeks" [value]="week.id">
+      {{week.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

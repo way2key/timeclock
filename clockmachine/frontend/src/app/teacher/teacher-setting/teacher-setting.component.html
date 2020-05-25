@@ -1,0 +1,144 @@
+<div class="tile is-ancestor">
+  <div class="tile is-6 is-parent">
+    <div class="tile is-child box">
+      <div class="login-box">
+        <p class="title">Modifier mot de passe🔏</p>
+        <form [formGroup]="changePasswordForm" (ngSubmit)="changePassword()">
+          <h2> Mot de passe </h2>
+          <p class="control has-icons-left">
+            <input class="input has-background-light has-text-grey" type="password" placeholder="New Password" formControlName="newPassword">
+            <span class="icon is-small is-left">
+              <i class="fas fa-lock"></i>
+            </span>
+          </p>
+          <h2> Confirmez le nouveau mot de passe </h2>
+          <p class="control has-icons-left">
+            <input class="input has-background-light has-text-grey" type="password" placeholder="Confirm Password" formControlName="confirmPassword">
+            <span class="icon is-small is-left">
+              <i class="fas fa-lock"></i>
+            </span>
+          </p>
+          <p class="control">
+            <button class="button is-success " type="submit" [disabled]="!changePasswordForm.valid">
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="tile is-4 is-vertical is-parent">
+    <div class="tile is-child box">
+      <div class="timeplan">
+        <p class="title">Horaire par défaut📅</p>
+        <p>Définissez l'horaire par défaut</p>
+        <mat-form-field appearance='outline'>
+          <mat-select [(ngModel)]="selectedWeek"  (selectionChange)="updateDefaultWeek()">
+            <mat-option *ngFor="let week of defaultWeek" [value]="week.id">
+              {{week.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="tile is-child box">
+      <div class="volume" *ngIf="!loading">
+        <p class="title">Volume🔊</p>
+        <p>Réglez le volume de la timbreuse</p>
+        <mat-slider class="slider" [(ngModel)] ="clockMachine.volume" thumbLabel (change)="updateClockMachineVolume()">
+        </mat-slider>
+      </div>
+    </div>
+  </div>
+
+  <div class="tile is-2 is-parent">
+    <div class="tile is-child box">
+      <p class="title">Danger Zone💣</p>
+      <div class="dangerButton">
+        <button type="button" class="button is-danger" (click)="deleteLog()">Logs</button>
+        <br>
+        <button type="button" class="button is-danger" (click)="deleteIncident()">Incidents</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tile is-ancestor">
+  <div class="tile is-4 is-vertical is-parent">
+    <div class="tile is-child box">
+      <p class="title">Notifications📫</p>
+      <div class="incidentNotification" *ngIf="!loading">
+        <p>Choissisez les notifications que vous voulez recevoir</p>
+        <mat-slide-toggle [(ngModel)]="clockMachine.insufficientWeekTimeQuotaNotification" (change)="updateClockMachineNotification()">Quota insuffisant</mat-slide-toggle><br>
+        <mat-slide-toggle [(ngModel)]="clockMachine.insufficientDayTimeQuotaNotification" (change)="updateClockMachineNotification()">Temps quotidien insuffisant</mat-slide-toggle><br>
+        <mat-slide-toggle [(ngModel)]="clockMachine.clockingOversightNotification" (change)="updateClockMachineNotification()">Oubli de pointage</mat-slide-toggle><br>
+        <mat-slide-toggle [(ngModel)]="clockMachine.lateArrivalNotification" (change)="updateClockMachineNotification()">Retard</mat-slide-toggle><br>
+        <mat-slide-toggle [(ngModel)]="clockMachine.earlyDepartureNotification" (change)="updateClockMachineNotification()">Départ anticipé</mat-slide-toggle><br>
+        <mat-slide-toggle [(ngModel)]="clockMachine.unallowedPresenceNotification" (change)="updateClockMachineNotification()">Présence non autorisée</mat-slide-toggle><br>
+      </div>
+    </div>
+    <div class="tile is-child box">
+      <p class="title">Testeur de sons📣</p>
+      <div class="tester">
+        <mat-form-field appearance='outline'>
+          <mat-select [(ngModel)]="soundToPlay">
+            <mat-option *ngFor="let sound of sounds" [value]="sound">
+              {{sound}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button type="button" class="button" (click)="playSound()"><i class="fas fa-play-circle"></i></button>
+      </div>
+    </div>
+  </div>
+  <div class="tile is-parent">
+    <div class="tile is-child box">
+      <p class="title">Attribuer les sons🎺</p>
+      <div class="sound" *ngIf="!loading">
+        <mat-list>
+         <mat-list-item>
+           <p>📥 Clock In:</p>
+           <mat-form-field appearance='outline'>
+             <mat-select [(value)]="clockMachine.sound.clockIn"  (selectionChange)="updateSound()">
+               <mat-option *ngFor="let sound of sounds" [value]="sound">
+                 {{sound}}
+               </mat-option>
+             </mat-select>
+           </mat-form-field>
+         </mat-list-item>
+         <mat-list-item>
+           <p>📤 Clock Off:</p>
+           <mat-form-field appearance='outline'>
+             <mat-select [(value)]="clockMachine.sound.clockOff"  (selectionChange)="updateSound()">
+               <mat-option *ngFor="let sound of sounds" [value]="sound">
+                 {{sound}}
+               </mat-option>
+             </mat-select>
+           </mat-form-field>
+         </mat-list-item>
+         <mat-list-item>
+           <p>🔎 Info:</p>
+           <mat-form-field appearance='outline'>
+             <mat-select [(value)]="clockMachine.sound.info"  (selectionChange)="updateSound()">
+               <mat-option *ngFor="let sound of sounds" [value]="sound">
+                 {{sound}}
+               </mat-option>
+             </mat-select>
+           </mat-form-field>
+         </mat-list-item>
+         <mat-list-item>
+           <p>📛 Error:</p>
+           <mat-form-field appearance='outline'>
+             <mat-select [(value)]="clockMachine.sound.error"  (selectionChange)="updateSound()">
+               <mat-option *ngFor="let sound of sounds" [value]="sound">
+                 {{sound}}
+               </mat-option>
+             </mat-select>
+           </mat-form-field>
+         </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+  </div>
+</div>

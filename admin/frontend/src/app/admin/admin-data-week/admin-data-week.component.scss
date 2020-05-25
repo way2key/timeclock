@@ -1,0 +1,25 @@
+.week {
+  display: flex;
+  flex-flow: row nowrap;
+  margin:1em;
+}
+
+.day {
+  width: 14%;
+}
+
+.control {
+  margin: 1em;
+}
+
+.existingWeek {
+  display: flex;
+  flex-flow: raw wrap;
+  align-items: baseline;
+  border-radius: 5px;
+  background-color: rgba(0,0,0,0.2);
+}
+
+.action {
+  margin: 1em;
+}

@@ -1,0 +1,83 @@
+.form {
+  margin: 2em;
+}
+.create {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: rgba(0,0,0,0.1);
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+
+.choice {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: baseline;
+  margin: 2em;
+  width: 30%;
+  $hue:30;
+  $saturation:50;
+  $lightness:50;
+  background-color: hsl($hue, $saturation, $lightness);
+  border-radius: 25px;
+}
+
+.date {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 1em;
+  width: 70%;
+}
+
+.name {
+  margin-left: 2em;
+}
+.presence {
+  margin-left: 2em;
+}
+
+.data {
+  margin:2em;
+}
+
+.existingHolidays {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin:1em;
+}
+
+.vacation {
+  width: 50%;
+}
+
+.holidays {
+  width: 50%;
+}
+
+.holiday {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  margin: 2px;
+}
+
+.hTitle {
+  width: 20%;
+}
+.hStartDate {
+  width: 15%;
+}
+.hEndDate {
+  width: 15%;
+}
+.hAllowPresence {
+  width: 5%;
+}
+.hAction {
+  width: 5%;
+}

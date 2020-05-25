@@ -1,0 +1,31 @@
+<h3>Heure à modifier : </h3>
+
+<form [formGroup]="timeForm" (ngSubmit)="onSubmit()">
+  <div class="timeChoiceBody">
+      <label>
+        <input type="time" class="timeChoice" formControlName="time" >
+      </label>
+  </div>
+  <br>
+  <div class="buttons has-addons">
+    <button mat-button [mat-dialog-close]="true" class="button is-success" type="submit" (click)="addTime()" >Ajouter du temps</button>
+    <button mat-button [mat-dialog-close]="true" class="button is-danger"  type="submit" (click)="removeTime()">Retirer du temps</button>
+  </div>
+  <h4>Elèves concernés : </h4>
+  <ul>
+    <li *ngFor="let student of students"> {{student.firstname | uppercase}} {{student.lastname}}</li>
+  </ul>
+  <br>
+  <mat-form-field>
+    <mat-label>Motif</mat-label>
+    <mat-select>
+    <mat-option *ngFor ="let motive of motives"  [value]="motive.justification">
+      {{motive.justification}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+  <mat-form-field >
+    <mat-label>Justification</mat-label>
+    <textarea formControlName="message" matInput></textarea>
+  </mat-form-field>
+</form>

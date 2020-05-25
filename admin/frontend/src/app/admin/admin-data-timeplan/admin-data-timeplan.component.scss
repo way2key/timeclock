@@ -1,0 +1,59 @@
+.newTimePlan {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 2%;
+  margin-left: 3%;
+  margin-right: 5%;
+}
+
+h1 {
+  font-size: 2em;
+  letter-spacing: 2px;
+  text-align: center;
+  margin: 0.5em;
+}
+
+h2 {
+  font-family: 'Nunito';
+}
+.timeChoice {
+  color: black;
+  font-size: 30px;
+  font-weight: bold;
+  background-color: inherit;
+  border-radius: 5px;
+  border-style: none;
+}
+
+.general {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.Timeplan {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  background-color: #778899;
+  margin: 4px;
+  padding: 2px;
+  padding-right: 8px;
+  padding-left: 6px;
+}
+
+.boundary {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  width: 40%;
+}
+
+.shift {
+  display: flex;
+  flex-flow: column nowrap;
+  margin:1px;
+}

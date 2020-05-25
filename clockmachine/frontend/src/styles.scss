@@ -1,0 +1,59 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '../node_modules/bulma/bulma.sass';
+
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700|Nunito:400,700');
+
+$turquoise: #44ddd0;
+$green: #27d7a1;
+$light-green: #45f69e;
+$dark-geen: rgb(0,100,80);
+
+$light: #f8f8f8;
+
+$family-sans-serif: "Nunito", sans-serif;
+$primary: $green;
+
+$link: $light-green;
+
+
+$control-border-width: 2px;
+$input-border-color: transparent;
+$input-shadow: none;
+
+
+html{
+  background: linear-gradient(to right top, $turquoise, $green);
+}
+
+html,body{
+  height: 100%;
+  margin: 0;
+}
+
+.centered-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.modal {
+  min-height: 200px;
+  width: 100%;
+  max-width: 60%;
+  background: white;
+  border-radius: 5px;
+  padding: 35;
+}
+
+.title {
+  font-family: 'Lato';
+  font-size: 24px;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

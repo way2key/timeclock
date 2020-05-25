@@ -1,0 +1,61 @@
+
+<form [formGroup]="timeplanForm" (change)="updateCanvasData()" (ngSubmit)="onSubmit()">
+  <div class="newTimePlan">
+    <div class="general">
+      <h1>Nouvel Horaire</h1>
+      <label>
+        <h2>Intitulé</h2>
+        <mat-form-field appearance="outline">
+          <input matInput type="text" formControlName="timeplanName" placeholder="Horaire personnalisé">
+        </mat-form-field>
+      </label>
+      <label>
+        <h2>Temps réglementaire</h2>
+        <input type="time" class="timeChoice" formControlName="mandatoryTime" >
+      </label>
+    </div>
+    <div class="time">
+      <h2>Début de la journée</h2>
+      <input type="time" class="timeChoice" formControlName="startOfDay" >
+      <h2>Début des cours</h2>
+      <input type="time" class="timeChoice" formControlName="startMorning" >
+      <h2>Début de la pause de midi</h2>
+      <input type="time" class="timeChoice" formControlName="endMorning" >
+      <h2>Fin de la pause de midi</h2>
+      <input type="time" class="timeChoice" formControlName="startAfternoon" >
+      <h2>Fin des cours</h2>
+      <input type="time" class="timeChoice" formControlName="endAfternoon" >
+      <h2>Fin de la journée</h2>
+      <input type="time" class="timeChoice" formControlName="endOfDay" >
+    </div>
+
+    <div class="canvas">
+      <div id="p5-sketch"></div>
+    </div>
+
+    <div class="control">
+      <button mat-fab color="warn" type="submit" [disabled]="!timeplanForm.valid">✚</button>
+    </div>
+  </div>
+</form>
+<br>
+<mat-divider></mat-divider>
+<h1>Horaires Existants</h1>
+<div *ngFor="let timeplan of timeplans">
+  <div class="Timeplan">
+    <h3>{{timeplan.name}}</h3>
+    <div class="time">
+      <p>{{"startOfDay "+timeplan.startOfDay}}</p>
+      <p>{{"endOfDay "+timeplan.endOfDay}}</p>
+    </div>
+    <div class="boundary">
+      <div class="shift" *ngFor="let s of timeplan.shift">
+        <p>{{"Début de la plage: " + s.start}}</p>
+        <p>{{"Fin de la plage: " + s.end}}</p>
+      </div>
+    </div>
+    <div class="action">
+      <button type="button" class="button is-danger" (click)="deleteTimeplan(timeplan._id)"><i class="fas fa-trash"></i></button>
+    </div>
+  </div>
+</div>

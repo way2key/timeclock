@@ -1,0 +1,26 @@
+<mat-toolbar>
+  <mat-toolbar-row class="toolbar">
+    <h1>Pointeuse V2.0</h1>
+    <div class="toolbarAction">
+      <p>{{teacher.firstname }} {{teacher.lastname | titlecase}}</p>
+      <button class="button is-danger has-text-white" (click)="logUserOut()">
+        <i class="fas fa-sign-out-alt"></i>
+      </button>
+    </div>
+
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-drawer-container class="app">
+  <mat-drawer mode="side" opened  class="sidenav" >
+    <nav>
+      <a class="menu-item" routerLinkActive="active" routerLink="dashboard">Vue Globale</a>
+      <a class="menu-item" routerLinkActive="active" routerLink="student">Stagiaires</a>
+      <a class="menu-item" routerLinkActive="active" routerLink="hist/log">Historique</a>
+      <a class="menu-item" routerLinkActive="active" routerLink="setting">Paramètres</a>
+      <a class="menu-item" routerLinkActive="active" routerLink="info">Infos</a>
+    </nav>
+  </mat-drawer>
+  <mat-drawer-content >
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
