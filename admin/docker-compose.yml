@@ -1,0 +1,31 @@
+version: '3.1'
+
+services:
+        frontend:
+                container_name: admin-frontend
+                depends_on:
+                        - database 
+                        - backend
+                image: admin-frontend
+                build:
+                        context: ./frontend
+                        dockerfile: frontend.dockerfile
+                ports:
+                        - "80:80"
+        database:
+                container_name: mongo
+                image: mongo
+                ports:
+                        - "27017:27017"
+
+        backend:
+                container_name: admin-api
+                image: admin-api
+                build:
+                        context: ./backend
+                        dockerfile: backend.dockerfile
+                environment:
+                        - NODE_ENV=production
+                ports:
+                        - "4000:4000"
+

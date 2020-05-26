@@ -1,5 +1,12 @@
-# timeclock
- 
+# Timeclock
+## Description
+This is my end of year project for my school. He's made of
+
+* timeclock interface
+* teacher management interface
+* administrator management interface
+
+## Installation
 ### Prerequisite
 In order to run this program you'll need to install some programs to your computer:
 * Node.js
