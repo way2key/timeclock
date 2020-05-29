@@ -3,7 +3,7 @@ const planner = require('./planner');
 const api = require('./api');
 const clockMachineId = require('./clockMachineId');
 const action = require('./action/action');
-
+const network = require('./network');
 const normalizePort = val => {
   const port = parseInt(val, 10);
 
@@ -51,7 +51,7 @@ server.listen(port);
 
 //socket
 const io = require('socket.io-client');
-const socket = io.connect("http://localhost:4000/clockMachine");
+const socket = io.connect(network.adminAPI + "/clockMachine");
 
 socket.on('requestProclamation', () => {
   action.getClockMachine(clockMachineId).

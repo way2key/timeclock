@@ -8,6 +8,7 @@ const presenceService = require('./presence-service');
 const clockMachineService = require('./clock-machine-service');
 const clockMachineId = require('../clockMachineId');
 const fetch = require('node-fetch');
+const network = require('../network');
 
 const Day = require('../data-schematic/day-schematic');
 const Clock = require('../data-schematic/clock-schematic');
@@ -187,7 +188,7 @@ exports.latenessArrivalIncident = (student) => {
 
       //getStudentWeek + timeplan
       let getStudentTimeplan = new Promise( (resolve, reject) => {
-        let weekUrl = 'http://localhost:4000/api/admin-data-week/' + student.weekId;
+        let weekUrl = network.adminAPI + '/api/admin-data-week/' + student.weekId;
         fetch(weekUrl)
         .then(res => res.json())
         .then(
@@ -214,7 +215,7 @@ exports.latenessArrivalIncident = (student) => {
               case 6:
               timeplanId = week.saturday;
             }
-            let url2 = 'http://localhost:4000/api/admin-data-timeplan/timeplan/' + timeplanId;
+            let url2 = network.adminAPI + '/api/admin-data-timeplan/timeplan/' + timeplanId;
             return fetch(url2).then(res => res.json());
           }
         )
@@ -259,7 +260,7 @@ exports.unallowedPresenceIncident = (student, clockId) => {
 
       //getStudentWeek + timeplan
       let getStudentTimeplan = new Promise( (resolve, reject) => {
-        let weekUrl = 'http://localhost:4000/api/admin-data-week/' + student.weekId;
+        let weekUrl = network.adminAPI + '/api/admin-data-week/' + student.weekId;
         fetch(weekUrl)
         .then(res => res.json())
         .then(
@@ -286,7 +287,7 @@ exports.unallowedPresenceIncident = (student, clockId) => {
               case 6:
               timeplanId = week.saturday;
             }
-            let url2 = 'http://localhost:4000/api/admin-data-timeplan/timeplan/' + timeplanId;
+            let url2 = network.adminAPI + '/api/admin-data-timeplan/timeplan/' + timeplanId;
             return fetch(url2);
           }
         )
@@ -300,7 +301,7 @@ exports.unallowedPresenceIncident = (student, clockId) => {
 
       //getHoliday
       let getHoliday = new Promise( (resolve, reject) => {
-        let holidayUrl = 'http://localhost:4000/api/admin-data-holiday/';
+        let holidayUrl = network.adminAPI + '/api/admin-data-holiday/';
         fetch(holidayUrl)
         .then(res => res.json())
         .then(holiday => {
@@ -337,7 +338,7 @@ exports.dailyTimeNotCompletedIncident = student => {
     return new Promise( (resolve,reject) => {
       let sTimeplan;
 
-      let weekUrl = 'http://localhost:4000/api/admin-data-week/' + student.weekId;
+      let weekUrl = network.adminAPI + '/api/admin-data-week/' + student.weekId;
       fetch(weekUrl)
       .then(res => res.json())
       .then(
@@ -364,7 +365,7 @@ exports.dailyTimeNotCompletedIncident = student => {
             case 6:
             timeplanId = week.saturday;
           }
-          let url2 = 'http://localhost:4000/api/admin-data-timeplan/timeplan/' + timeplanId;
+          let url2 = network.adminAPI + '/api/admin-data-timeplan/timeplan/' + timeplanId;
           return fetch(url2).then(res => res.json());
         }
       )
@@ -394,7 +395,7 @@ exports.dailyTimeNotCompletedIncident = student => {
 exports.hastyDepartureIncident = student => {
     return new Promise( (resolve,reject) => {
       let sTimeplan;
-      let weekUrl = 'http://localhost:4000/api/admin-data-week/' + student.weekId;
+      let weekUrl = network.adminAPI + '/api/admin-data-week/' + student.weekId;
       fetch(weekUrl)
       .then(res => res.json())
       .then(
@@ -421,7 +422,7 @@ exports.hastyDepartureIncident = student => {
             case 6:
             timeplanId = week.saturday;
           }
-          let url2 = 'http://localhost:4000/api/admin-data-timeplan/timeplan/' + timeplanId;
+          let url2 = network.adminAPI + '/api/admin-data-timeplan/timeplan/' + timeplanId;
           return fetch(url2).then(res => res.json());
         }
       )
@@ -472,7 +473,7 @@ exports.quotaTimeIncident = (student) => {
   return new Promise( (resolve,reject) => {
     let sTimeplan;
 
-    let weekUrl = 'http://localhost:4000/api/admin-data-week/' + student.weekId;
+    let weekUrl = network.adminAPI + '/api/admin-data-week/' + student.weekId;
     fetch(weekUrl)
     .then(res => res.json())
     .then(
@@ -482,11 +483,11 @@ exports.quotaTimeIncident = (student) => {
           let wednesday = week.wednesday;
           let thursday = week.thursday;
           let friday = week.friday;
-          let mondayUrl = 'http://localhost:4000/api/admin-data-timeplan/timeplan/' + monday;
-          let tuesdayUrl = 'http://localhost:4000/api/admin-data-timeplan/timeplan/' + tuesday;
-          let wednesdayUrl = 'http://localhost:4000/api/admin-data-timeplan/timeplan/' + wednesday;
-          let thursdayUrl = 'http://localhost:4000/api/admin-data-timeplan/timeplan/' + thursday;
-          let fridayUrl = 'http://localhost:4000/api/admin-data-timeplan/timeplan/' + friday;
+          let mondayUrl = network.adminAPI + '/api/admin-data-timeplan/timeplan/' + monday;
+          let tuesdayUrl = network.adminAPI + '/api/admin-data-timeplan/timeplan/' + tuesday;
+          let wednesdayUrl = network.adminAPI + '/api/admin-data-timeplan/timeplan/' + wednesday;
+          let thursdayUrl = network.adminAPI + '/api/admin-data-timeplan/timeplan/' + thursday;
+          let fridayUrl = network.adminAPI + '/api/admin-data-timeplan/timeplan/' + friday;
           let mondayPromise = fetch(mondayUrl).then(res => res.json());
           let tuesdayUrlPromise = fetch(tuesdayUrl).then(res => res.json());
           let wednesdayPromise = fetch(wednesdayUrl).then(res => res.json());
