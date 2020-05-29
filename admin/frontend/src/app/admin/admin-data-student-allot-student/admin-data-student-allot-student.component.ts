@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { FormGroup, FormControl } from '@angular/forms';
 import * as io from 'socket.io-client';
 import { AdminDataService } from '../admin-data.service';
-
+import { Network } from '../../../assets/network';
 @Component({
   selector: 'app-admin-data-student-allot-student',
   templateUrl: './admin-data-student-allot-student.component.html',
@@ -28,7 +28,7 @@ export class AdminDataStudentAllotStudentComponent implements OnInit {
       startWith(''),
       map(value =>  this._filter(value))
     );
-    const socket = io.connect("http://localhost:4000/allotStudent");
+    const socket = io.connect(Network.adminAPI + "/allotStudent");
     socket.on('updateClockMachine', clockMachines => {
       this.clockMachines = clockMachines;
     })

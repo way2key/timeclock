@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { Network } from '../../assets/network';
 @Injectable({
   providedIn: 'root'
 })
 export class AdminDashboardService {
-  private adminUrl = 'http://localhost:4000/api/admin-dashboard/admin';
+  private adminUrl = Network.adminAPI + '/api/admin-dashboard/admin';
   private auth = 'Bearer '+ localStorage.getItem("token");
   private httpOptions = {
     headers: new HttpHeaders({

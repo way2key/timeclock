@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminDashboardService } from '../admin-dashboard.service';
+import { Network } from '../../../assets/network';
 import * as moment from 'moment/moment';
 import * as io from 'socket.io-client';
 
@@ -18,7 +19,7 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTeacher();
-    const socket = io.connect("http://localhost:4000/dashboard");
+    const socket = io.connect(Network.adminAPI + "/dashboard");
     socket.on('updateClockMachine', clockMachines => {
       this.clockMachines = clockMachines;
     })
