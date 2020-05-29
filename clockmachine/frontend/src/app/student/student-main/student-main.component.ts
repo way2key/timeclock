@@ -5,6 +5,7 @@ import { StudentService } from '../student.service';
 import { StudentMessageComponent } from '../student-message/student-message.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Howl, Howler } from 'howler';
+import { ClockMachineId } from '../../../assets/metadata/clockmachinetag';
 
 @Component({
   selector: 'app-student-main',
@@ -18,7 +19,6 @@ export class StudentMainComponent implements OnInit {
     password: new FormControl(''),
   });
   refresh="";
-  clockMachineId="5eac2b3d197357249cc24249";
 
   constructor(public dialog: MatDialog, private studentService: StudentService) { }
 
@@ -42,7 +42,7 @@ export class StudentMainComponent implements OnInit {
   }
 
   showInfo(studentHash) {
-    this.studentService.getClockMachine(this.clockMachineId).subscribe(
+    this.studentService.getClockMachine(ClockMachineId).subscribe(
       clockMachine => {
         let file = clockMachine.sound.info;
         let path = "../../../assets/sound/"+file;

@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { StudentService } from '../student.service';
 import { Howl, Howler } from 'howler';
+import { ClockMachineId } from '../../../assets/metadata/clockmachinetag';
 
 @Component({
   selector: 'app-student-message',
@@ -73,7 +74,7 @@ export class StudentMessageComponent implements OnInit {
   }
 
   getSound() {
-    this.studentService.getClockMachine(this.clockMachineId).subscribe(
+    this.studentService.getClockMachine(ClockMachineId).subscribe(
       clockMachine => {
         let sound={};
         Object.entries(clockMachine.sound).map(item => {
