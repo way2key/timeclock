@@ -1,9 +1,9 @@
 const express = require('express');
 const adminDB = express();
-
+const network = require('../network');
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/admin',
+mongoose.connect('mongodb://' + network.adminDB + ':27017/admin',
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
