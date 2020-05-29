@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Network } from '../../assets/metadata/network';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeacherStudentService {
-  private apiUrl = 'http://localhost:3000/api/teacher-student';
-  private adminUrl = 'http://localhost:4000/api/admin-data-week';
-  private studentStatusUrl = 'http://localhost:3000/api/student';
+
+  private apiUrl = Network.clockMachineApi + '/api/teacher-student';
+  private adminUrl = Network.adminAPI + '/api/admin-data-week';
+  private studentStatusUrl = Network.clockMachineApi + '/api/student';
   private auth = 'Bearer '+ localStorage.getItem("token");
   private httpOptions = {
     headers: new HttpHeaders({

@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Network } from '../../assets/metadata/network';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeacherAuthService {
-  private loginUrl = 'http://localhost:4000/api/admin-auth/login';
-  private verifyTokenUrl = 'http://localhost:4000/api/admin-auth/verifyToken';
+  private loginUrl = Network.adminAPI + '/api/admin-auth/login';
+  private verifyTokenUrl = Network.adminAPI + '/api/admin-auth/verifyToken';
   private auth = 'Bearer '+ localStorage.getItem("token");
   private httpOptions = {
     headers: new HttpHeaders({

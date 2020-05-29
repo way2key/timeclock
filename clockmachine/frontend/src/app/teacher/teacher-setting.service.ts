@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Network } from '../../assets/metadata/network';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeacherSettingService {
-  private teacherUrl = 'http://localhost:3000/api/teacher-setting';
-  private adminUrl = 'http://localhost:4000/api/admin-data-week';
+  private teacherUrl = Network.clockMachineApi + '/api/teacher-setting';
+  private adminUrl = Network.adminAPI + '/api/admin-data-week';
   private auth = 'Bearer '+ localStorage.getItem("token");
   private httpOptions = {
     headers: new HttpHeaders({
@@ -34,7 +35,7 @@ export class TeacherSettingService {
   }
 
   getSound() {
-    const url = "http://localhost:3000/api/server/sound";
+    const url = Network.clockMachineApi + "/api/server/sound";
     return this.http.get<any>(url, this.httpOptions);
   }
 

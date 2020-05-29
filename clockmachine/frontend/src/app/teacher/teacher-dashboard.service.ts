@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Network } from '../../assets/metadata/network';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeacherDashboardService {
-  private TeacherUrl = 'http://localhost:4000/api/server/user/';
-  private IncidentUrl = 'http://localhost:3000/api/teacher-dashboard/incident';
+  private TeacherUrl =  Network.adminAPI + '/api/server/user/';
+  private IncidentUrl =  Network.clockMachineApi + '/api/teacher-dashboard/incident';
   private auth = 'Bearer '+ localStorage.getItem("token");
   private httpOptions = {
     headers: new HttpHeaders({
