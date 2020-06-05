@@ -3,7 +3,7 @@ const network = require('../network');
 
 exports.isAuthenticatedOnServer = (token) => {
  return new Promise( (resolve, reject) => {
-   let url = network.adminAPI + '/admin-auth-controller/verifyToken/' + token;
+   let url = network.adminAPI + '/api/admin-auth/verifyToken/' + token;
    fetch(url)
    .then(
      (connected) => resolve(connected)
