@@ -77,7 +77,8 @@ const clockMachine = io
   socket.on('proclamation', machine => {
     machine['socketId'] = socket.id;
     machine['createdTime'] = socket.handshake.time;
-    machine['url'] = "http://"+socket.handshake.headers.host.split(":")[0]+":4200/teacher/login";
+    //machine['url'] = "http://"+socket.handshake.headers.host.split(":")[0]+":4200/teacher/login";
+    machine['url'] = "http://"+socket.conn.remoteAddress.split(":")[3] + ":4200/teacher/login"
     clockMachines.push(machine);
     dashboard.emit("newClockMachine", machine);
   })
