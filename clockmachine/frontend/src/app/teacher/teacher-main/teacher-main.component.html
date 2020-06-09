@@ -2,10 +2,10 @@
   <mat-toolbar-row class="toolbar">
     <div (click)="drawer.toggle()" class="toolbarGroup">
       <i class="fas fa-bars"></i>
-      <h1>Pointeuse V2.0</h1>
+      <p class="toolbarText">Pointeuse V2.0</p>
     </div>
     <div class="toolbarAction">
-      <p>{{teacher.firstname }} {{teacher.lastname | titlecase}}</p>
+      <p class="toolbarText">{{teacher.firstname }} {{teacher.lastname | titlecase}}</p>
       <button class="button is-danger has-text-white" (click)="logUserOut()">
         <i class="fas fa-sign-out-alt"></i>
       </button>

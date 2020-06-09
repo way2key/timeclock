@@ -3,7 +3,7 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 0 14px;
-  background-color: green;
+  background-color: #172A3A;
 }
 
 .app{
@@ -11,7 +11,7 @@
   background-color: transparent;
 
   .sidenav {
-    background-color: black;
+    background-color: #004346;
   }
 
   .content {
@@ -46,4 +46,12 @@
   justify-content: space-between;
   align-items: baseline;
   margin-right: 1em;
+}
+
+.toolbarText {
+  color:white;
+  font-family: Helvetica;
+  text-align: center;
+  letter-spacing: 3px;
+  text-shadow: 2px 2px 5px red;
 }
