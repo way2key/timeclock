@@ -11,7 +11,7 @@
     </mat-form-field>
     <mat-form-field class="example-full-width">
       <input type="text" placeholder="Trouvez un stagiaire" matInput [formControl]="myControlSearch" [matAutocomplete]="auto">
-      <button class="clear has-text-white" mat-button mat-icon-button matSuffix (click)="clearSearchField()" *ngIf="myControlSearch.value">×</button>
+      <button class="has-text-white" mat-button mat-icon-button matSuffix (click)="clearSearchField()" *ngIf="myControlSearch.value">×</button>
       <mat-autocomplete #auto="matAutocomplete">
         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
           {{option}}
@@ -28,10 +28,9 @@
         <mat-panel-title>
           {{s.firstname}} {{s.lastname}}
         </mat-panel-title>
-        <mat-panel-description [ngClass]="{'performedTime': true, 'negativeTime': s.performedTime < -(0.1/12), 'positiveTime': s.performedTime >= -(0.1/12) }">
-          Temps validé: {{convertTime(s.performedTime)}}
-        </mat-panel-description>
+
       </mat-expansion-panel-header>
+
       <ng-template matExpansionPanelContent>
         <form>
           <mat-form-field>

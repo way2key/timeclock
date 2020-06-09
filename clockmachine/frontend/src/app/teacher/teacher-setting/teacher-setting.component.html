@@ -95,15 +95,18 @@
   <div class="tile is-parent">
     <div class="tile is-child box">
       <p class="title">Attribuer les sons🎺</p>
-      <div class="sound" *ngIf="!loading">
-        <p>📥 Clock In:</p>
-        <mat-form-field appearance='outline'>
-         <mat-select [(value)]="clockMachine.sound.clockIn"  (selectionChange)="updateSound()">
-           <mat-option *ngFor="let sound of sounds" [value]="sound">
-             {{sound}}
-           </mat-option>
-         </mat-select>
-        </mat-form-field>
+      <div class="sounds" *ngIf="!loading">
+        <div class="sound">
+          <p>📥 Clock In:</p>
+          <mat-form-field appearance='outline'>
+           <mat-select [(value)]="clockMachine.sound.clockIn"  (selectionChange)="updateSound()">
+             <mat-option *ngFor="let sound of sounds" [value]="sound">
+               {{sound}}
+             </mat-option>
+           </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="sound">
         <p>📤 Clock Off:</p>
         <mat-form-field appearance='outline'>
          <mat-select [(value)]="clockMachine.sound.clockOff"  (selectionChange)="updateSound()">
@@ -112,6 +115,8 @@
            </mat-option>
          </mat-select>
         </mat-form-field>
+        </div>
+        <div class="sound">
         <p>🔎 Info:</p>
         <mat-form-field appearance='outline'>
          <mat-select [(value)]="clockMachine.sound.info"  (selectionChange)="updateSound()">
@@ -120,6 +125,8 @@
            </mat-option>
          </mat-select>
         </mat-form-field>
+        </div>
+        <div class="sound">
         <p>📛 Error:</p>
         <mat-form-field appearance='outline'>
          <mat-select [(value)]="clockMachine.sound.error"  (selectionChange)="updateSound()">
@@ -128,6 +135,7 @@
            </mat-option>
          </mat-select>
         </mat-form-field>
+        </div>
       </div>
     </div>
   </div>
