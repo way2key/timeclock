@@ -1,22 +1,18 @@
-.toolbar {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0 14px;
-  background-color: #172A3A;
-}
+@import '../../../styles.scss';
 
-.app{
+.app {
   height: 100%;
   background-color: transparent;
+  overflow: hidden;
+}
 
-  .sidenav {
-    background-color: #004346;
-  }
+.sidenav {
+  background-color: $prussianBlue;
+  height: 100%;
+}
 
-  .content {
-    //background-color: transparent;
-  }
+.content {
+  height: 100%;
 }
 
 .menu-item {
@@ -32,26 +28,9 @@
 }
 
 .toolbarGroup {
-  width: 10%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: baseline;
-}
-
-.toolbarAction {
-  width: 12%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-right: 1em;
-}
-
-.toolbarText {
-  color:white;
-  font-family: Helvetica;
-  text-align: center;
-  letter-spacing: 3px;
-  text-shadow: 2px 2px 5px red;
+  margin: 1em;
 }

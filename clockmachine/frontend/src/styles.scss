@@ -4,19 +4,19 @@
 
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700|Nunito:400,700');
 
-$green: #09BC8A;
-$turquoise: #004346;
-$light-green: #45f69e;
-$dark-geen: rgb(0,100,80);
+$darkSkyBlue: #74B3CE;
+$steelTeal: #508991;
+$prussianBlue: #172A3A;
+$warmBlack: #004346;
+$mountainMeadow: #09BC8A;
 
 $family-sans-serif: "Nunito", sans-serif;
-$primary: $green;
-$link: $light-green;
-
+$primary: red;
+$link: red;
 
 
 html {
-  background: linear-gradient(to right top, $turquoise, $green);
+  background: linear-gradient(to right top, $warmBlack, $mountainMeadow);
   height: 100%;
   width: 100%;
 }
@@ -27,7 +27,6 @@ body {
   height: 100%;
   width: 100%;
  }
-
 
 .centered-content {
   display: flex;
@@ -44,9 +43,33 @@ body {
   padding: 35;
 }
 
+.mainTitle {
+  font-size: 60px;
+  font-weight: 400;
+  margin: 1em;
+  display:block;
+  text-align: center;
+  text-shadow: 1px 1px 2px rgba(34,34,34,0.5);
+}
+
 .title {
   font-family: 'Lato';
   font-size: 24px;
   letter-spacing: 2px;
   text-align: center;
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: $warmBlack;
+}
+
+.toolbarText {
+  color:white;
+  font-family: Roboto;
+  text-align: center;
+  letter-spacing: 3px;
+  margin: 1em;
 }

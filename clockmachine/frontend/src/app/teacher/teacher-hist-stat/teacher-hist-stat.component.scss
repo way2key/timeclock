@@ -1,8 +1,4 @@
-.hist{
-  //margin-left: 4px;
-  background-color: darkgreen;
-}
-
+@import '../../../styles.scss';
 .toolbar {
   height: auto;
 }
@@ -19,10 +15,9 @@
 .student {
   display: flex;
   flex-direction: row;
-  //justify-content: space-between;
   align-items: center;
   border-radius: 10px;
-  background-color: #778899;
+  background-color: $mountainMeadow;
   margin: 4px;
   padding: 2px;
   padding-right: 8px;

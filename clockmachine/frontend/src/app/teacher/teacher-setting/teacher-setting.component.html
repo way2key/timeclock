@@ -96,48 +96,38 @@
     <div class="tile is-child box">
       <p class="title">Attribuer les sons🎺</p>
       <div class="sound" *ngIf="!loading">
-        <mat-list>
-         <mat-list-item>
-           <p>📥 Clock In:</p>
-           <mat-form-field appearance='outline'>
-             <mat-select [(value)]="clockMachine.sound.clockIn"  (selectionChange)="updateSound()">
-               <mat-option *ngFor="let sound of sounds" [value]="sound">
-                 {{sound}}
-               </mat-option>
-             </mat-select>
-           </mat-form-field>
-         </mat-list-item>
-         <mat-list-item>
-           <p>📤 Clock Off:</p>
-           <mat-form-field appearance='outline'>
-             <mat-select [(value)]="clockMachine.sound.clockOff"  (selectionChange)="updateSound()">
-               <mat-option *ngFor="let sound of sounds" [value]="sound">
-                 {{sound}}
-               </mat-option>
-             </mat-select>
-           </mat-form-field>
-         </mat-list-item>
-         <mat-list-item>
-           <p>🔎 Info:</p>
-           <mat-form-field appearance='outline'>
-             <mat-select [(value)]="clockMachine.sound.info"  (selectionChange)="updateSound()">
-               <mat-option *ngFor="let sound of sounds" [value]="sound">
-                 {{sound}}
-               </mat-option>
-             </mat-select>
-           </mat-form-field>
-         </mat-list-item>
-         <mat-list-item>
-           <p>📛 Error:</p>
-           <mat-form-field appearance='outline'>
-             <mat-select [(value)]="clockMachine.sound.error"  (selectionChange)="updateSound()">
-               <mat-option *ngFor="let sound of sounds" [value]="sound">
-                 {{sound}}
-               </mat-option>
-             </mat-select>
-           </mat-form-field>
-         </mat-list-item>
-        </mat-list>
+        <p>📥 Clock In:</p>
+        <mat-form-field appearance='outline'>
+         <mat-select [(value)]="clockMachine.sound.clockIn"  (selectionChange)="updateSound()">
+           <mat-option *ngFor="let sound of sounds" [value]="sound">
+             {{sound}}
+           </mat-option>
+         </mat-select>
+        </mat-form-field>
+        <p>📤 Clock Off:</p>
+        <mat-form-field appearance='outline'>
+         <mat-select [(value)]="clockMachine.sound.clockOff"  (selectionChange)="updateSound()">
+           <mat-option *ngFor="let sound of sounds" [value]="sound">
+             {{sound}}
+           </mat-option>
+         </mat-select>
+        </mat-form-field>
+        <p>🔎 Info:</p>
+        <mat-form-field appearance='outline'>
+         <mat-select [(value)]="clockMachine.sound.info"  (selectionChange)="updateSound()">
+           <mat-option *ngFor="let sound of sounds" [value]="sound">
+             {{sound}}
+           </mat-option>
+         </mat-select>
+        </mat-form-field>
+        <p>📛 Error:</p>
+        <mat-form-field appearance='outline'>
+         <mat-select [(value)]="clockMachine.sound.error"  (selectionChange)="updateSound()">
+           <mat-option *ngFor="let sound of sounds" [value]="sound">
+             {{sound}}
+           </mat-option>
+         </mat-select>
+        </mat-form-field>
       </div>
     </div>
   </div>
