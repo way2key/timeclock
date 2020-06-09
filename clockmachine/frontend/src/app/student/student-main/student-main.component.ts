@@ -20,19 +20,23 @@ export class StudentMainComponent implements OnInit {
   });
   refresh="";
 
+
   constructor(public dialog: MatDialog, private studentService: StudentService) { }
 
   ngOnInit(): void {
-    document.getElementById("cardNumber").focus();
+    this.selectField();
   }
 
   public info(): void{
     this.infoRequested = !this.infoRequested;
+    this.selectField();
   }
 
   readCard() {
     let cardHashValue = this.cardForm.value.cardNumber;
     this.refresh="";
+
+    this.selectField();
     if(this.infoRequested){
       this.infoRequested = !this.infoRequested;
       this.showInfo(cardHashValue);
@@ -54,7 +58,8 @@ export class StudentMainComponent implements OnInit {
     )
 
     let dialogRef = this.dialog.open(StudentInfoComponent,{data: {hash: studentHash}});
-    dialogRef.afterClosed().subscribe(result =>{
+    dialogRef.afterClosed().subscribe(result => {
+      this.selectField();
       console.log('The dialog was closed');
     })
   }
@@ -62,8 +67,13 @@ export class StudentMainComponent implements OnInit {
   showMessage(studentHash) {
     let dialogRef = this.dialog.open(StudentMessageComponent,{data: {hash: studentHash}});
 
-    dialogRef.afterClosed().subscribe(result =>{
+    dialogRef.afterClosed().subscribe(result => {
+      this.selectField();
     })
+  }
+
+  selectField() {
+    document.getElementById("cardInput").focus();
   }
 
 }

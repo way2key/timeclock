@@ -1,18 +1,10 @@
-<div class="welcome">
-  <h1 class="title"> Timbreuse Mobile </h1>
-  <button *ngIf="infoRequested" class="button is-link has-text-white" (click)="info()">
-    <p>Info</p>
-  </button>
-  <button *ngIf="!infoRequested" class="button is-info has-text-black is-light" (click)="info()">
-    <p>Info</p>
-  </button>
-  <br>
-  <div>
-    <form [formGroup]="cardForm" (ngSubmit)="readCard()">
-      <div class="form-group">
-        <input type="text" id="cardNumber" class="form-control" placeholder="Numéro de la carte" formControlName="cardNumber" [(ngModel)]="refresh">
-      </div>
-      <button class="btn btn-primary" type="submit" [disabled]="cardForm.invalid">Timbrez</button>
-    </form>
+<div class="welcome" (click)="selectField()">
+  <h1 class="mainTitle"> Timbreuse Mobile </h1>
+  <button *ngIf="infoRequested" class="button is-link is-rounded has-text-white" (click)="info()">Info</button>
+  <button *ngIf="!infoRequested" class="button is-info is-rounded has-text-black is-light" (click)="info()">Info</button>
+  <div class="selectField">
+      <form [formGroup]="cardForm" (ngSubmit)="readCard()">
+        <input autocomplete="off" type="text" id="cardInput"  formControlName="cardNumber" [(ngModel)]="refresh">
+      </form>
   </div>
 </div>

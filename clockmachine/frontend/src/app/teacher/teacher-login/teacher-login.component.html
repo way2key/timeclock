@@ -1,7 +1,6 @@
 <div class="centered-content">
-  <div class="login-box">
     <form [formGroup]="loginForm" (ngSubmit)="logUserIn()">
-      <h1 class="title has-text-primary">Interface Enseignant</h1>
+      <h1 class="title has-text-grey-darker">Interface Enseignant</h1>
       <div class="field">
         <p class="control has-icons-left">
           <input class="input has-background-light" type="text" placeholder="Username" formControlName="username">
@@ -28,5 +27,4 @@
       </div>
       <div *ngIf ="incorrectPassword" style="text-align:bottom"></div>
     </form>
-  </div>
 </div>
