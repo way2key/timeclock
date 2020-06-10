@@ -48,7 +48,7 @@ export class AdminDataTimeplanComponent implements OnInit {
 
       s.draw = () => {
         s.clear();
-        s.background(0,100);
+        s.background(0,50);
 
         // shift
         s.strokeWeight(4);

@@ -16,13 +16,13 @@
      </mat-form-field>
    </form>
     <div class="buttons has-addons">
-      <button class="button is-success" (click)="modifyTime()" [disabled]="onCheckBox()">Modifier le temps</button>
-      <button class="button is-primary"(click)="modifyPresence()" [disabled]="onCheckBox()">Modifier la présence</button>
-      <button class="button is-info" (click)="assignWeek()" [disabled]="onCheckBox()">Attribuer une semaine</button>
-      <button class="button is-link" (click)="modifyHash()" [disabled]="onCheckBox()">Modifier le hash</button>
-      <button class="button is-danger" (click)="deleteStudent()" [disabled]="onCheckBox()"> Supprimer </button>
-      <button class="button" id="allButton" (click)="onAll()">Tout sélectionner</button>
-      <button class="button is-info " id="allButton" (click)="ngOnInit()">
+      <button style="width:16%" class="button is-success" (click)="modifyTime()" [disabled]="onCheckBox()">Modifier le temps</button>
+      <button style="width:16%" class="button is-primary" (click)="modifyPresence()" [disabled]="onCheckBox()">Modifier la présence</button>
+      <button style="width:16%" class="button is-info" (click)="assignWeek()" [disabled]="onCheckBox()">Attribuer une semaine</button>
+      <button style="width:16%" class="button is-link" (click)="modifyHash()" [disabled]="onCheckBox()">Modifier le hash</button>
+      <button style="width:16%" class="button is-danger" (click)="deleteStudent()" [disabled]="onCheckBox()"> Supprimer </button>
+      <button style="width:16%" class="button" id="allButton" (click)="onAll()">Tout sélectionner</button>
+      <button style="width:4%" class="button is-info " id="allButton" (click)="ngOnInit()">
         <i class="fas fa-sync"></i>
       </button>
     </div>
@@ -30,30 +30,29 @@
 </div>
 
 <div>
-  <div>
-    <ng-container *ngFor="let s of shownStudents">
-      <div class="student" (click)="s.isSelected=!s.isSelected">
-        <div class="student-info">
-          <div class="icons">
-            <i *ngIf="s.status"     class="fas fa-check fa-2x p"></i>
-            <i *ngIf="!s.status"    class="fas fa-coffee fa-2x np"></i>
-            <i *ngIf="s.presence"   class="fas fa-calendar-check fa-2x p"></i>
-            <i *ngIf="!s.presence"  class="fas fa-calendar-times fa-2x np"></i>
-          </div>
-          <div class="name">
-            <h1>{{s.firstname}} {{s.lastname}}</h1>
-          </div>
-          <div class="time">
-            <p [ngClass]="{'performedTime': true, 'negativeTime': s.performedTime < -(0.1/12), 'positiveTime': s.performedTime >= -(0.1/12) }"> {{convertTime(s.performedTime)}} </p>
-          </div>
-          <div class="week">
-            <p> {{getWeekName(s.weekId)}}</p>
-          </div>
-          <div class="hash">
-            <p>{{s.hash}}</p>
-          </div>
+  <ng-container *ngFor="let s of shownStudents">
+    <div class="student" (click)="s.isSelected=!s.isSelected">
+      <div class="student-info">
+        <div class="icons">
+          <i *ngIf="s.status"     class="fas fa-check fa-2x p"></i>
+          <i *ngIf="!s.status"    class="fas fa-coffee fa-2x np"></i>
+          <i *ngIf="s.presence"   class="fas fa-calendar-check fa-2x p"></i>
+          <i *ngIf="!s.presence"  class="fas fa-calendar-times fa-2x np"></i>
         </div>
-        <mat-checkbox class="checkbox" [checked]="s.isSelected" [id]="s.hash"></mat-checkbox>
+        <div class="name">
+          <p class="subtitle">{{s.firstname}} {{s.lastname}}</p>
+        </div>
+        <div class="time">
+          <p [ngClass]="{'performedTime': true, 'negativeTime': s.performedTime < -(0.1/12), 'positiveTime': s.performedTime >= -(0.1/12) }"> {{convertTime(s.performedTime)}} </p>
+        </div>
+        <div class="week">
+          <p class="subtitle"> {{getWeekName(s.weekId)}}</p>
+        </div>
+        <div class="hash">
+          <p class="subtitle">{{s.hash}}</p>
+        </div>
       </div>
-    </ng-container>
+      <mat-checkbox class="checkbox" [checked]="s.isSelected" [id]="s.hash"></mat-checkbox>
+    </div>
+  </ng-container>
 </div>

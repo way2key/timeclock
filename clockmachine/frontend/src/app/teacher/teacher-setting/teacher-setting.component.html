@@ -56,9 +56,9 @@
     <div class="tile is-child box">
       <p class="title">Danger Zone💣</p>
       <div class="dangerButton">
-        <button type="button" class="button is-danger" (click)="deleteLog()">Logs</button>
+        <button type="button" class="button is-danger" style="width:50%" (click)="deleteLog()">Logs</button>
         <br>
-        <button type="button" class="button is-danger" (click)="deleteIncident()">Incidents</button>
+        <button type="button" class="button is-danger" style="width:50%" (click)="deleteIncident()">Incidents</button>
       </div>
     </div>
   </div>
@@ -94,7 +94,7 @@
   </div>
   <div class="tile is-parent">
     <div class="tile is-child box">
-      <p class="title">Attribuer les sons🎺</p>
+      <p class="title">Attribuer les sons🎶</p>
       <div class="sounds" *ngIf="!loading">
         <div class="sound">
           <p>📥 Clock In:</p>
@@ -137,6 +137,11 @@
         </mat-form-field>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="tile is-parent">
+    <div class="tile is-child box">
+      <p class="title">Personnalisation🌈</p>
     </div>
   </div>
 </div>
