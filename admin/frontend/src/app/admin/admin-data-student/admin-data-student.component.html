@@ -20,17 +20,13 @@
   </form>
 </div>
 
-<div>
-  <br>
-  <br>
-  <h1>Liste des stagiaires</h1>
-  <div class="student">
-    <ng-container *ngFor="let s of shownStudents">
-      <div class="student-info">
-        <h1 matSubheader>{{s.firstname}} {{s.lastname}}</h1>
-        <div>
-          <p>{{s.hash}}</p>
-        </div>
+<div class="student">
+  <ng-container *ngFor="let s of shownStudents">
+    <div class="student-info">
+      <h1 matSubheader>{{s.firstname}} {{s.lastname}}</h1>
+      <div>
+        <p>{{s.hash}}</p>
       </div>
-    </ng-container>
+    </div>
+  </ng-container>
 </div>

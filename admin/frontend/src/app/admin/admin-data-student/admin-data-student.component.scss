@@ -1,11 +1,8 @@
-.toolbar {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  height: auto;
-  margin: auto;
-}
+@import '../../../styles.scss';
 
+.toolbar {
+  background: $eerieBlack;
+}
 .student {
   display: flex;
   flex-flow: row wrap;
@@ -14,10 +11,8 @@
 .student-info {
   width:20%;
   align-content: stretch;
-  border-radius: 10px;
-  background-color: rgba(120,105,95,0.4);
-  margin: 4px;
-  padding: 2px;
-  padding-right: 8px;
-  padding-left: 6px;
+  border-radius: 4px;
+  background-color: $paleSilver;
+  margin: 0.5em;
+  padding: 1em;
 }

@@ -2,7 +2,7 @@
 <form [formGroup]="timeplanForm" (change)="updateCanvasData()" (ngSubmit)="onSubmit()">
   <div class="newTimePlan">
     <div class="general">
-      <h1>Nouvel Horaire</h1>
+      <p class="title">Nouvel Horaire</p>
       <label>
         <h2>Intitulé</h2>
         <mat-form-field appearance="outline">
@@ -15,17 +15,17 @@
       </label>
     </div>
     <div class="time">
-      <h2>Début de la journée</h2>
+      <p>Début de la journée</p>
       <input type="time" class="timeChoice" formControlName="startOfDay" >
-      <h2>Début des cours</h2>
+      <p>Début des cours</p>
       <input type="time" class="timeChoice" formControlName="startMorning" >
-      <h2>Début de la pause de midi</h2>
+      <p>Début de la pause de midi</p>
       <input type="time" class="timeChoice" formControlName="endMorning" >
-      <h2>Fin de la pause de midi</h2>
+      <p>Fin de la pause de midi</p>
       <input type="time" class="timeChoice" formControlName="startAfternoon" >
-      <h2>Fin des cours</h2>
+      <p>Fin des cours</p>
       <input type="time" class="timeChoice" formControlName="endAfternoon" >
-      <h2>Fin de la journée</h2>
+      <p>Fin de la journée</p>
       <input type="time" class="timeChoice" formControlName="endOfDay" >
     </div>
 
@@ -40,7 +40,7 @@
 </form>
 <br>
 <mat-divider></mat-divider>
-<h1>Horaires Existants</h1>
+<p class="title">Horaires Existants</p>
 <div *ngFor="let timeplan of timeplans">
   <div class="Timeplan">
     <h3>{{timeplan.name}}</h3>

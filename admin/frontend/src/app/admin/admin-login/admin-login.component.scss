@@ -1,7 +1,12 @@
+@import '../../../styles.scss';
+
+body {
+  background: linear-gradient(to top right, $blackOlive, $flame);
+}
 .login-box {
   padding: 25px;
   background: transparent;
-  border-radius:5px;
+  border-radius: 5px;
 }
 
 .error {

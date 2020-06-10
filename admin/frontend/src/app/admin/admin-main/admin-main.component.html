@@ -1,25 +1,30 @@
-<mat-toolbar>
-  <mat-toolbar-row class="toolbar">
-    <h1>Admin</h1>
-    <div class="toolbarAction">
-      <p>{{admin.firstname | titlecase }} {{admin.lastname | titlecase}}</p>
-      <button class="button is-danger has-text-white" (click)="logAdminOut()">
-        <i class="fas fa-sign-out-alt"></i>
-      </button>
-    </div>
-  </mat-toolbar-row>
-</mat-toolbar>
-<mat-drawer-container class="app">
-  <mat-drawer mode="side" opened  class="sidenav" >
-    <nav>
-      <a class="menu-item" routerLinkActive="active" routerLink="dashboard">Vue Globale</a>
-      <a class="menu-item" routerLinkActive="active" routerLink="start">Rentrée</a>
-      <a class="menu-item" routerLinkActive="active" routerLink="data/student">Données</a>
-      <a class="menu-item" routerLinkActive="active" routerLink="backup">Sauvegardes</a>
-      <a class="menu-item" routerLinkActive="active" routerLink="info">Infos</a>
-    </nav>
-  </mat-drawer>
-  <mat-drawer-content >
-    <router-outlet></router-outlet>
-  </mat-drawer-content>
-</mat-drawer-container>
+<div class="app">
+  <mat-toolbar>
+    <mat-toolbar-row class="toolbar">
+      <div (click)="drawer.toggle()" class="toolbarAction">
+        <i class="fas fa-bars"></i>
+        <p class="toolbarText">Admin</p>
+      </div>
+      <div class="toolbarAction">
+        <p class="toolbarText">{{admin.firstname | titlecase }} {{admin.lastname | titlecase}}</p>
+        <button class="button is-danger has-text-white" (click)="logAdminOut()">
+          <i class="fas fa-sign-out-alt"></i>
+        </button>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-sidenav-container class="app">
+    <mat-sidenav mode="side" opened  class="sidenav" #drawer >
+      <nav>
+        <a class="menu-item" routerLinkActive="active" routerLink="dashboard">Vue Globale</a>
+        <a class="menu-item" routerLinkActive="active" routerLink="start">Rentrée</a>
+        <a class="menu-item" routerLinkActive="active" routerLink="data/student">Données</a>
+        <a class="menu-item" routerLinkActive="active" routerLink="backup">Sauvegardes</a>
+        <a class="menu-item" routerLinkActive="active" routerLink="info">Infos</a>
+      </nav>
+    </mat-sidenav>
+    <mat-sidenav-content class="content" >
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

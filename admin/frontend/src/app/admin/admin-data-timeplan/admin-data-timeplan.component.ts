@@ -53,7 +53,7 @@ export class AdminDataTimeplanComponent implements OnInit {
         // shift
         s.strokeWeight(4);
         s.stroke(0);
-        s.fill(100,255,0,200);
+        s.fill(s.color("#EA591F"));
         for(let i=0; i<this.shift.length; i+=2){
           let x_1 = s.map(moment.duration(this.shift[i]).asHours(),0,24,x_start,x_end);
           let y_1 = y

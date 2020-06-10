@@ -1,8 +1,6 @@
 <div class="dashboard">
-  <h1 class="main-title"> Bienvenue {{admin.firstname | titlecase }} {{admin.lastname | titlecase}}</h1>
-
+  <h1 class="mainTitle"> Bienvenue {{admin.firstname | titlecase }} {{admin.lastname | titlecase}}</h1>
   <div class="clockingMachines">
-    <h2 class="title">Pointeuses</h2>
     <mat-grid-list cols="2" rowHeight="2:1">
       <mat-grid-tile *ngFor="let cm of clockMachines">
         <div class="machine">
@@ -11,7 +9,7 @@
           </a>
         </div>
         <mat-grid-tile-footer class="footer">
-          <p>{{cm.title}}</p>
+          <p class="toolbarText">{{cm.title}}</p>
           <p>{{cm.createdTime}}</p>
         </mat-grid-tile-footer>
 

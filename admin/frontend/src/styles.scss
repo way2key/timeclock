@@ -4,56 +4,78 @@
 
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700|Nunito:400,700');
 
-$orange: #f96706;
-$gray: #ac7753;
-$light-orange: #ec6a13;
-$dark-orange: #803300;
+$floralWhite: #FFFCF2;
+$paleSilver: #CCC5B9;
+$blackOlive: #403D39;
+$eerieBlack: #252422;
+$flame: #EA591F;
 
-$light: #f8f8f8;
 
 $family-sans-serif: "Nunito", sans-serif;
-$primary: $gray;
-
-$link: $light-orange;
-
-
-$control-border-width: 2px;
-$input-border-color: transparent;
-$input-shadow: none;
+$primary: red;
+$link: red;
 
 
-html{
-  background: linear-gradient(to left top, $light-orange, $gray );
-}
-
-html,body{
+html {
+  background: linear-gradient(to top left, $paleSilver, $floralWhite);
   height: 100%;
-  margin: 0;
+  width: 100%;
 }
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 1em;
+  height: 100%;
+  width: 100%;
+ }
 
 .centered-content {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
   height: 100%;
+  background: linear-gradient(to top right, $flame, $blackOlive );
 }
 
 .modal {
   min-height: 200px;
-  width: 100%;
   max-width: 60%;
   background: white;
   border-radius: 5px;
   padding: 35;
 }
 
-.title {
-  font-family: 'Lato';
-  font-size: 24px;
-  letter-spacing: 2px;
+.mainTitle {
+  color: $eerieBlack;
+  font-size: 60px;
+  font-weight: 400;
+  margin: 1em;
+  display:block;
   text-align: center;
+  text-shadow: 1px 1px 2px $blackOlive;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.title {
+  color: $blackOlive;
+  font-family: 'Lato';
+  font-size: 36px;
+  letter-spacing: 2px;
+  text-align: center;
+  margin: 1em;
+  text-shadow: 1px 1px 2px $paleSilver;
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: $flame;
+}
+
+.toolbarText {
+  color: $floralWhite;
+  font-family: Roboto;
+  text-align: center;
+  margin: 1em;
+}
