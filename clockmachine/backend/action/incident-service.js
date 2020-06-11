@@ -240,8 +240,9 @@ exports.latenessArrivalIncident = (student) => {
       .then(
         data => {
           //Control
-          if(true){
+          if(sClock.length === 1){
             let late = (sClock.filter(c => moment.duration(c.time).as('seconds') < moment.duration(sTimeplan.shift[0].start).as('seconds')).length === 0)
+
             if(late){
               this.saveNewIncident(student._id, "Retard");
             }
