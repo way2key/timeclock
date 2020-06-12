@@ -21,7 +21,7 @@ export class TeacherSettingService {
 
   changePassword(password) {
     const url = this.teacherUrl + "/password";
-    return this.http.post<any>(this.teacherUrl, password, this.httpOptions);
+    return this.http.put<any>(this.teacherUrl, password, this.httpOptions);
   }
 
   getClockMachine(clockMachineId) {
@@ -41,22 +41,22 @@ export class TeacherSettingService {
 
   updateClockMachineNotification(payload) {
     const url = this.teacherUrl + "/notification";
-    return this.http.post<any>(url, payload, this.httpOptions);
+    return this.http.put<any>(url, payload, this.httpOptions);
   }
 
   updateClockMachineVolume(payload) {
     const url = this.teacherUrl + "/volume";
-    return this.http.post<any>(url, payload, this.httpOptions);
+    return this.http.put<any>(url, payload, this.httpOptions);
   }
 
   updateClockMachineDefaultWeek(payload) {
     const url = this.teacherUrl + "/week";
-    return this.http.post<any>(url, payload, this.httpOptions);
+    return this.http.put<any>(url, payload, this.httpOptions);
   }
 
   updateClockMachineSound(payload) {
     const url = this.teacherUrl + "/sound";
-    return this.http.post<any>(url, payload, this.httpOptions);
+    return this.http.put<any>(url, payload, this.httpOptions);
   }
 
   deleteLog() {

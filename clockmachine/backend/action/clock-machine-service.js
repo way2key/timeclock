@@ -30,6 +30,7 @@ exports.getClockMachine = (clockMachineId) => {
 }
 
 exports.updateClockMachineNotification = (clockMachine) => {
+  console.log(clockMachine);
   return new Promise( (resolve, reject) => {
     ClockMachine.findOneAndUpdate({_id:clockMachine._id},{$set:
       {
@@ -53,7 +54,7 @@ exports.updateClockMachineDefaultWeek = (payload) => {
   return new Promise( (resolve, reject) => {
     ClockMachine.findOneAndUpdate({_id:payload.id},{$set: {defaultWeek:payload.defaultWeek}})
     .then(
-      () => resolve("Succes")
+      () => resolve()
     )
     .catch(
       error => reject("Impossible de modifier la semaine par défaut <= " + error)

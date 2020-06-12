@@ -105,3 +105,24 @@ exports.verifyAdminToken = (req, res, next) => {
     res.status(200).send('false');
   }
 }
+
+exports.updatePassword = (req, res, next) => {
+  console.log(req.params.password);
+  try {
+    const token = req.headers.authorization.split(' ')[1];
+    console.log(token);
+    const decodedToken = jwt.verify(token, secret);
+    const userId = decodedToken.userId;
+    console.log(userId);
+    bcrypt.hash(req.body.password, 10)
+    .then(hashedPassword => {
+      return User.findOneAndUpdate({_id:userId},{$set:{password: hashedPassword}});
+    })
+    .then(oui => res.status(200).json("oui"))
+    .catch(error => res.status(500).json({error}));
+  } catch {
+    res.status(401).json({
+      error: new Error('Invalid request!')
+    });
+  }
+}

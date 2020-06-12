@@ -5,22 +5,13 @@ const bcrypt = require('bcrypt');
 const action = require('../action/action.js');
 
 exports.changePassword = (req, res) => {
-  try {
-    const token = req.headers.authorization.split(' ')[1];
-    const decodedToken = jwt.verify(token, secret);
-    const userId = decodedToken.userId;
-
-    bcrypt.hash(req.body.password, 10)
-    .then(hashedPassword => {
-      return User.findOneAndUpdate({_id:userId},{$set:{password: hashedPassword}});
-    })
-    .then(res.status(200).json({message: 'Mot de passe changé'}))
-    .catch(error => res.status(500).json({error}));
-  } catch {
-    res.status(401).json({
-      error: new Error('Invalid request!')
-    });
-  }
+  action.updatePassword(req.body.password)
+  .then(
+    () => res.status(200).json('Mot de passe changé')
+  )
+  .catch(
+    error => res.status(500).json(error)
+  )
 }
 
 exports.getClockMachine = (req, res) => {
@@ -86,7 +77,7 @@ exports.deleteLog = (req, res) => {
 exports.deleteIncident = (req, res) => {
   action.deleteIncident()
   .then(
-    () => res.status(200).json("Logs supprimé")
+    () => res.status(200).json("Incidents supprimé")
   )
   .catch(
     error => res.status(500).json("Impossible to delete logs <= " + error)

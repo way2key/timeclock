@@ -13,3 +13,18 @@ exports.isAuthenticatedOnServer = (token) => {
    )
  })
 }
+
+exports.updatePassword = (password) => {
+ return new Promise( (resolve, reject) => {
+   let url = network.adminAPI + '/api/admin-auth/password/' + password;
+   const token = req.headers.authorization.split(' ')[1];
+   console.log(token);
+   fetch(url)
+   .then(
+     (oui) => resolve(oui)
+   )
+   .catch(
+     error => reject("Impossible de changer le mot de passe <= " + error)
+   )
+ })
+}

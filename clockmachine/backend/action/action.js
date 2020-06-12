@@ -64,6 +64,7 @@ const action = {
   deleteIncident: clockMachineService.deleteIncident,
 
   isAuthenticatedOnServer: authService.isAuthenticatedOnServer,
+  updatePassword: authService.updatePassword,
   getSound: soundService.getSound,
 }
 
