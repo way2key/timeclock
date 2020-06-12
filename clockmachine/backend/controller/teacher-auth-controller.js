@@ -61,22 +61,3 @@ exports.signupUser = (req, res, next) => {
   )
   .catch(error => res.status(400).json(error));
 }
-
-exports.verifyToken = (req, res, next) => {
-  try{
-    verifiedJwt = jwt.verify(req.params.token, secret);
-    let userId = verifiedJwt.userId;
-    User.findOne({_id: userId})
-    .then((user) => {
-      if(user) {
-        res.status(200).send('true');
-      } else {
-        res.status(400).send('false');
-      }
-    })
-    .catch(error => {res.status(200).send('false');console.log('false');});
-  }
-  catch(e){
-    res.status(200).send('false');
-  }
-}
