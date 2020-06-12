@@ -56,7 +56,7 @@ exports.updatePerformedTime = () => {
   )
 }
 
-exports.modifyPerformedTime =  (time, studentHash) => {
+exports.updatePerformedTime =  (time, studentHash) => {
   return new Promise( (resolve, reject) => {
     User.findOneAndUpdate({type:0, hash:studentHash},{$inc:{performedTime: time}})
     .then(

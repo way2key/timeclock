@@ -175,7 +175,7 @@ export class TeacherStudentComponent implements OnInit {
     )
   }
 
-  modifyTime() {
+  updateTime() {
     let dialogRef = this.dialog.open(TeacherStudentTimeComponent, {data: {students: this.students, closed: false}});
 
     dialogRef.afterClosed()
@@ -191,7 +191,7 @@ export class TeacherStudentComponent implements OnInit {
     )
   }
 
-  modifyPresence() {
+  updatePresence() {
     let source$ = this.students.filter(s => s.isSelected).map(s => {
       let log = {
         "teacher": this.teacher.firstname + " " + this.teacher.lastname,
@@ -201,7 +201,7 @@ export class TeacherStudentComponent implements OnInit {
       };
       this.createLog(log);
       let payload = {hash: s.hash};
-      return this.teacherStudentService.modifyPresence(payload);
+      return this.teacherStudentService.updatePresence(payload);
     });
 
     forkJoin(source$)
@@ -224,7 +224,7 @@ export class TeacherStudentComponent implements OnInit {
     )
   }
 
-  modifyHash() {
+  updateHash() {
     let selectedStudent = this.students.filter(s => s.isSelected);
     let dialogRef = this.dialog.open(TeacherStudentHashComponent, {data:{students:selectedStudent}});
 

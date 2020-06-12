@@ -10,6 +10,6 @@ router.get('/breather/:hash', studentController.getStudentBreather);
 router.get('/clock/:hash', studentController.getStudentClock);
 router.get('/day-time/:hash', studentController.getStudentDayTime);
 router.get('/:hash', studentController.getStudentInfo);
-router.post('/', studentController.clockAStudent);
+router.post('/clock', studentController.clockAStudent);
 
 module.exports = router;

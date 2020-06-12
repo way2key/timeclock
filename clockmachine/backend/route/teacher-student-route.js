@@ -5,15 +5,15 @@ const auth = require('../middleware/auth');
 const teacherStudentController = require('../controller/teacher-student-controller');
 
 //Routes
-router.post('/time', auth, teacherStudentController.modifyPerformedTime);
-router.post('/log', auth, teacherStudentController.createLog);
-router.post('/week', auth, teacherStudentController.updateStudentWeek);
-router.post('/hash', auth, teacherStudentController.updateStudentHash);
-router.get('/presence/:hash', teacherStudentController.getStudentPresence);
-router.get('/teacher', auth, teacherStudentController.getATeacher);
-router.get('/:id', auth, teacherStudentController.getAStudent);
 router.get('/', auth, teacherStudentController.getAllStudents);
-router.put('/presence', auth, teacherStudentController.modifyPresence);
+router.get('/teacher', auth, teacherStudentController.getATeacher);
+router.get('/:id', auth, teacherStudentController.getAStudentById);
+router.get('/presence/:id', teacherStudentController.getStudentPresence);
+router.post('/log', auth, teacherStudentController.createLog);
+router.put('/time', auth, teacherStudentController.updatePerformedTime);
+router.put('/week', auth, teacherStudentController.updateStudentWeek);
+router.put('/hash', auth, teacherStudentController.updateStudentHash);
+router.put('/presence', auth, teacherStudentController.updatePresence);
 router.delete('/:id', auth, teacherStudentController.deleteStudent);
 
 

@@ -16,10 +16,10 @@
      </mat-form-field>
    </form>
     <div class="buttons has-addons">
-      <button style="width:16%" class="button is-success" (click)="modifyTime()" [disabled]="onCheckBox()">Modifier le temps</button>
-      <button style="width:16%" class="button is-primary" (click)="modifyPresence()" [disabled]="onCheckBox()">Modifier la présence</button>
+      <button style="width:16%" class="button is-success" (click)="updateTime()" [disabled]="onCheckBox()">Modifier le temps</button>
+      <button style="width:16%" class="button is-primary" (click)="updatePresence()" [disabled]="onCheckBox()">Modifier la présence</button>
       <button style="width:16%" class="button is-info" (click)="assignWeek()" [disabled]="onCheckBox()">Attribuer une semaine</button>
-      <button style="width:16%" class="button is-link" (click)="modifyHash()" [disabled]="onCheckBox()">Modifier le hash</button>
+      <button style="width:16%" class="button is-link" (click)="updateHash()" [disabled]="onCheckBox()">Modifier le hash</button>
       <button style="width:16%" class="button is-danger" (click)="deleteStudent()" [disabled]="onCheckBox()"> Supprimer </button>
       <button style="width:16%" class="button" id="allButton" (click)="onAll()">Tout sélectionner</button>
       <button style="width:4%" class="button is-info " id="allButton" (click)="ngOnInit()">

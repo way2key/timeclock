@@ -28,7 +28,7 @@ exports.getStudentCurrentDay = (studentHash) => {
       }
     )
     .catch(
-      error => reject(error)
+      error => reject("Impossible de trouver l'utilisateur avec son hash <= " + error)
     )
   });
 }

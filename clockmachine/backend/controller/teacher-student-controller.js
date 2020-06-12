@@ -11,16 +11,31 @@ exports.getAllStudents = (req, res)=>{
   .catch(error => res.status(400).json(error));
 }
 
-exports.getAStudent = (req, res)=>{
+exports.getAStudentById = (req, res) => {
   User.findOne({_id: req.params.id, type:0})
   .then(student => res.status(200).json(student))
-  .catch(error => res.status(400).json(error));
+  .catch(error => res.status(400).json("Impossible de récupérer le student <= + "+error));
 }
 
-exports.modifyPerformedTime = (req, res) => {
-  performedTimeService.modifyPerformedTime(req.body.time,req.body.hash)
-  .then(response => res.status(200).json({response}))
-  .catch(error => res.status(500).json(error));
+exports.getATeacher = (req, res) => {
+  const token = req.headers.authorization.split(' ')[1];
+  action.getTeacherFromToken(token)
+  .then(
+    (teacher) => res.status(200).json(teacher)
+  )
+  .catch(
+    (error) => res.status(500).json(error)
+  )
+}
+
+exports.getStudentPresence = (req, res) => {
+  action.checkStudentPresence(req.params.id)
+  .then(
+    presence => res.status(200).json(presence)
+  )
+  .catch(
+    error => res.status(200).json(false)
+  )
 }
 
 exports.createLog = (req, res) => {
@@ -36,22 +51,17 @@ exports.createLog = (req, res) => {
     response => res.status(201).json("Log créé avec succès")
   )
   .catch(
-    error => res.status(400).json(error)
+    error => res.status(400).json("Impossible de créer le log <= " + error)
   );
 }
 
-exports.getATeacher = (req, res) => {
-  const token = req.headers.authorization.split(' ')[1];
-  action.getTeacherFromToken(token)
-  .then(
-    (teacher) => res.status(200).json(teacher)
-  )
-  .catch(
-    (error) => res.status(500).json(error)
-  )
+exports.updatePerformedTime = (req, res) => {
+  performedTimeService.updatePerformedTime(req.body.time,req.body.hash)
+  .then(response => res.status(200).json({response}))
+  .catch(error => res.status(500).json(error));
 }
 
-exports.modifyPresence = (req, res) => {
+exports.updatePresence = (req, res) => {
   action.getStudentCurrentDay(req.body.hash)
   .then(
     dayId => {
@@ -68,16 +78,6 @@ exports.modifyPresence = (req, res) => {
   )
   .catch(
     error => res.status(500).json("Impossible de modifier la présence <= " + error)
-  )
-}
-
-exports.getStudentPresence = (req, res) => {
-  action.checkStudentPresence(req.params.hash)
-  .then(
-    presence => res.status(200).json(presence)
-  )
-  .catch(
-    error => res.status(200).json(false)
   )
 }
 

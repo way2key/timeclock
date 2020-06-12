@@ -54,24 +54,24 @@ export class TeacherStudentService {
     return this.http.get<any>(url, this.httpOptions);
   }
 
-  modifyPresence(payload) {
+  updatePresence(payload) {
     const url = this.apiUrl + '/presence';
     return this.http.put(url, payload, this.httpOptions);
   }
 
-  modifyPerformedTime(payload) {
+  updatePerformedTime(payload) {
     const url = this.apiUrl + '/time';
-    return this.http.post<any>(url, payload, this.httpOptions);
+    return this.http.put<any>(url, payload, this.httpOptions);
   }
 
   updateStudentWeek(payload) {
     const url = this.apiUrl + '/week';
-    return this.http.post<any>(url, payload, this.httpOptions);
+    return this.http.put<any>(url, payload, this.httpOptions);
   }
 
   updateStudentHash(payload) {
     const url = this.apiUrl + '/hash';
-    return this.http.post<any>(url, payload, this.httpOptions);
+    return this.http.put<any>(url, payload, this.httpOptions);
   }
 
   deleteStudent(studentId) {

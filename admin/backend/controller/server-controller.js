@@ -6,6 +6,6 @@ exports.getUserFromToken = (req, res, next) => {
     user => res.status(200).json(user)
   )
   .catch(
-    error => res.status(500).json("Unable to retrieve user <=" + error)
+    error => res.status(500).json("Unable to retrieve user <= " + error)
   )
 }

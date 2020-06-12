@@ -62,7 +62,7 @@ export class TeacherStudentTimeComponent implements OnInit {
     }
     this.students.forEach(
       (student) => {
-        this.modifyTime(hours,student);
+        this.updateTime(hours,student);
     });
 
   }
@@ -87,9 +87,9 @@ export class TeacherStudentTimeComponent implements OnInit {
     this.choice = 1;
   }
 
-  modifyTime(hours, student) {
+  updateTime(hours, student) {
     const payload = {time: hours, hash:student.hash};
-    return this.teacherStudentService.modifyPerformedTime(payload)
+    return this.teacherStudentService.updatePerformedTime(payload)
     .subscribe(
       result => {
         console.log(result)
