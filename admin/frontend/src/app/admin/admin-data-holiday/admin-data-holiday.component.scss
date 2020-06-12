@@ -19,10 +19,7 @@
   align-items: baseline;
   margin: 2em;
   width: 30%;
-  $hue:30;
-  $saturation:50;
-  $lightness:50;
-  background-color: hsl($hue, $saturation, $lightness);
+  background-color: $flame;
   border-radius: 25px;
 }
 

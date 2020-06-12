@@ -10,10 +10,10 @@
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
-      <div>
-        <input type="file" class="button is-light" accept="text/csv" (change)="onFileSelect($event)">
-        <button class="button is-light" (click)="importStudent()">Importer les stagiaires</button>
-        <button class="button is-info" (click)="allotStudent()">Répartir les stagiaires</button>
+      <div class="toolbarAction">
+        <input type="file" class="button file" accept="text/csv" (change)="onFileSelect($event)">
+        <button class="button import" (click)="importStudent()">Importer les stagiaires</button>
+        <button class="button allot" (click)="allotStudent()">Répartir les stagiaires</button>
         <button class="button is-danger" (click)="deleteAllStudent()">Réinitialisation</button>
       </div>
     </mat-toolbar>

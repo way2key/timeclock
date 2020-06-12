@@ -4,9 +4,7 @@
   position: relative;
 }
 .toolbar {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  color: $eerieBlack;
   height: auto;
   margin: auto;
 }
@@ -33,9 +31,8 @@
   overflow: auto;
 }
 
-.myTitle {
-  margin: 1em;
-  margin-top:2em;
+.title {
+  text-align:left;
 }
 .allot {
   display: flex;
@@ -53,4 +50,18 @@
   display: flex;
   flex-direction: row;
   width: 25%;
+}
+
+.clockmachine {
+  background-color: $blackOlive;
+}
+
+.link {
+  background-color: $flame;
+  color: $floralWhite;
+}
+
+.random {
+  background-color: $paleSilver;
+  color: $eerieBlack;
 }

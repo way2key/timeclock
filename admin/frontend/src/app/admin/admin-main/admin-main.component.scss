@@ -5,6 +5,7 @@
   background-color: transparent;
   overflow: hidden;
 }
+
 .sidenav {
   background-color: $eerieBlack;
   color: $floralWhite;
@@ -14,7 +15,6 @@
 .content {
   height: 100%;
 }
-
 
 .menu-item {
   display: flex;
@@ -29,7 +29,7 @@
 }
 
 .toolbarAction {
-  margin: 2em;
+  margin: 1em;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

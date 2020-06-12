@@ -1,8 +1,31 @@
 @import '../../../styles.scss';
 
 .toolbar {
-  background: $eerieBlack;
+  color:$flame;
+  background: $blackOlive;
+  height: auto;
+  margin: auto;
 }
+
+.toolbarAction {
+  display: flex;
+  justify-content: raw;
+}
+
+.file {
+  background-color: $paleSilver;
+}
+
+.import {
+  background-color: $flame;
+  color:$floralWhite;
+}
+
+.allot {
+  background-color: $blackOlive;
+  color:$floralWhite;
+}
+
 .student {
   display: flex;
   flex-flow: row wrap;
@@ -12,7 +35,7 @@
   width:20%;
   align-content: stretch;
   border-radius: 4px;
-  background-color: $paleSilver;
+  background-color: $floralWhite;
   margin: 0.5em;
   padding: 1em;
 }
