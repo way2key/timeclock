@@ -3,7 +3,7 @@
     <div class="tile is-child box">
       <div class="login-box">
         <p class="title">Modifier mot de passe🔏</p>
-        <form [formGroup]="changePasswordForm" (ngSubmit)="changePassword()">
+        <form [formGroup]="updatePasswordForm" (ngSubmit)="updatePassword()">
           <h2> Mot de passe </h2>
           <p class="control has-icons-left">
             <input class="input has-background-light has-text-grey" type="password" placeholder="New Password" formControlName="newPassword">
@@ -19,7 +19,7 @@
             </span>
           </p>
           <p class="control">
-            <button class="button is-success " type="submit" [disabled]="!changePasswordForm.valid">
+            <button class="button is-success " type="submit" [disabled]="!updatePasswordForm.valid">
               <i class="fas fa-arrow-right"></i>
             </button>
           </p>

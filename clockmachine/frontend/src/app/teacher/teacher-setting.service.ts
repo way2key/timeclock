@@ -19,9 +19,9 @@ export class TeacherSettingService {
   };
   constructor(private http: HttpClient) { }
 
-  changePassword(password) {
+  updatePassword(password) {
     const url = this.teacherUrl + "/password";
-    return this.http.put<any>(this.teacherUrl, password, this.httpOptions);
+    return this.http.put<any>(url, password, this.httpOptions);
   }
 
   getClockMachine(clockMachineId) {

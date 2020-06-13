@@ -11,7 +11,7 @@ import { ClockMachineId } from '../../../assets/metadata/clockmachinetag';
   styleUrls: ['./teacher-setting.component.scss']
 })
 export class TeacherSettingComponent implements OnInit {
-  changePasswordForm = new FormGroup({
+  updatePasswordForm = new FormGroup({
     newPassword: new FormControl(''),
     confirmPassword: new FormControl(''),
   });
@@ -56,12 +56,12 @@ export class TeacherSettingComponent implements OnInit {
     )
   }
 
-  changePassword(): void {
-    let p1 = this.changePasswordForm.value.newPassword;
-    let p2 = this.changePasswordForm.value.confirmPassword;
+  updatePassword(): void {
+    let p1 = this.updatePasswordForm.value.newPassword;
+    let p2 = this.updatePasswordForm.value.confirmPassword;
     let payload = {password: p1};
     if(p1===p2){
-      this.teacherSettingService.changePassword(payload)
+      this.teacherSettingService.updatePassword(payload)
       .subscribe(
         ((data) => {
           console.log('success: ', data);

@@ -4,8 +4,9 @@ const secret = require('../secret.js');
 const bcrypt = require('bcrypt');
 const action = require('../action/action.js');
 
-exports.changePassword = (req, res) => {
-  action.updatePassword(req.body.password)
+exports.updatePassword = (req, res) => {
+  const bearer = req.headers.authorization;
+  action.updatePassword(req.body.password, bearer)
   .then(
     () => res.status(200).json('Mot de passe changé')
   )

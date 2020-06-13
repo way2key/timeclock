@@ -14,14 +14,21 @@ exports.isAuthenticatedOnServer = (token) => {
  })
 }
 
-exports.updatePassword = (password) => {
+exports.updatePassword = (password, bearer) => {
  return new Promise( (resolve, reject) => {
-   let url = network.adminAPI + '/api/admin-auth/password/' + password;
-   const token = req.headers.authorization.split(' ')[1];
-   console.log(token);
-   fetch(url)
+   let url = network.adminAPI + '/api/admin-auth/password/';
+   let payload = { password: password };
+   let httpOptions = {
+     method: "PUT",
+     body: JSON.stringify(payload),
+     headers: {
+       "Content-Type":  "application/json",
+       "Authorization": bearer
+     }
+   };
+   fetch(url,httpOptions)
    .then(
-     (oui) => resolve(oui)
+     () => resolve()
    )
    .catch(
      error => reject("Impossible de changer le mot de passe <= " + error)
