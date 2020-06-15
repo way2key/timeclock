@@ -38,7 +38,7 @@ export class StudentService {
   }
 
   clockAStudent(hash: string): Observable<any> {
-    return this.http.post<any>(Network.clockMachineApi + '/api/student', {hash: hash});
+    return this.http.post<any>(Network.clockMachineApi + '/api/student/clock', {hash: hash});
   }
 
   getStudentClock(hash: string): Observable<any> {
