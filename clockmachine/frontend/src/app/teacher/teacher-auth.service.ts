@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Network } from '../../assets/metadata/network';
+import { AppRuntimeConfigurationService } from '../app-runtime-config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeacherAuthService {
-  private loginUrl = Network.adminAPI + '/api/admin-auth/login';
-  private verifyTokenUrl = Network.adminAPI + '/api/admin-auth/verifyToken';
+  private loginUrl = this.runtimeConfiguration.getConfig().adminAPI + '/api/admin-auth/login';
+  private verifyTokenUrl = this.runtimeConfiguration.getConfig().adminAPI + '/api/admin-auth/verifyToken';
   private auth = 'Bearer '+ localStorage.getItem("token");
   private httpOptions = {
     headers: new HttpHeaders({
@@ -18,7 +18,7 @@ export class TeacherAuthService {
     })
   };
 
-  constructor(private http: HttpClient, private router: Router){ }
+  constructor(private http: HttpClient, private router: Router, private runtimeConfiguration: AppRuntimeConfigurationService){ }
   private isAuth = false;
   private token = localStorage.getItem('token');
 

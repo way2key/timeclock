@@ -5,7 +5,8 @@ import { StudentService } from '../student.service';
 import { StudentMessageComponent } from '../student-message/student-message.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Howl, Howler } from 'howler';
-import { ClockMachineId } from '../../../assets/metadata/clockmachinetag';
+import { AppRuntimeConfigurationService } from '../../app-runtime-config.service';
+
 
 @Component({
   selector: 'app-student-main',
@@ -21,7 +22,7 @@ export class StudentMainComponent implements OnInit {
   refresh="";
 
 
-  constructor(public dialog: MatDialog, private studentService: StudentService) { }
+  constructor(public dialog: MatDialog, private studentService: StudentService, private runtimeConfiguration: AppRuntimeConfigurationService) { }
 
   ngOnInit(): void {
     this.selectField();
@@ -46,7 +47,7 @@ export class StudentMainComponent implements OnInit {
   }
 
   showInfo(studentHash) {
-    this.studentService.getClockMachine(ClockMachineId).subscribe(
+    this.studentService.getClockMachine(this.runtimeConfiguration.getConfig().clockMachineId).subscribe(
       clockMachine => {
         let file = clockMachine.sound.info;
         let path = "../../../assets/sound/"+file;

@@ -3,7 +3,8 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { TeacherSettingService } from '../teacher-setting.service';
 import { Router } from '@angular/router';
 import { Howl, Howler } from 'howler';
-import { ClockMachineId } from '../../../assets/metadata/clockmachinetag';
+import { AppRuntimeConfigurationService } from '../../app-runtime-config.service';
+
 
 @Component({
   selector: 'app-teacher-setting',
@@ -27,11 +28,11 @@ export class TeacherSettingComponent implements OnInit {
   infoSound;
   errorSound;
 
-  constructor(private teacherSettingService: TeacherSettingService, private router: Router, private formBuilder: FormBuilder,) { }
+  constructor(private teacherSettingService: TeacherSettingService, private router: Router, private formBuilder: FormBuilder, private runtimeConfiguration: AppRuntimeConfigurationService) { }
 
   ngOnInit(): void {
     this.loading = true;
-    this.getClockMachine(ClockMachineId);
+    this.getClockMachine(this.runtimeConfiguration.getConfig().clockMachineId);
     this.getDefaultWeek();
     this.getSound();
   }
@@ -110,7 +111,7 @@ export class TeacherSettingComponent implements OnInit {
   updateDefaultWeek(): void {
     let payload = {
       defaultWeek: this.selectedWeek,
-      id:ClockMachineId
+      id:this.runtimeConfiguration.getConfig().clockMachineId
     }
 
     this.teacherSettingService.updateClockMachineDefaultWeek(payload)
@@ -122,7 +123,7 @@ export class TeacherSettingComponent implements OnInit {
 
   updateSound(): void {
     let payload = {
-      clockMachineId:ClockMachineId,
+      clockMachineId:this.runtimeConfiguration.getConfig().clockMachineId,
       sound: {
         clockIn:this.clockMachine.sound.clockIn,
         clockOff:this.clockMachine.sound.clockOff,

@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule }    from '@angular/common/http';
-
+import { HttpClientModule } from '@angular/common/http';
+import { AppRuntimeConfigurationService } from './app-runtime-config.service';
 //Modules
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -60,7 +60,11 @@ import { StudentTimelineComponent } from './student/student-timeline/student-tim
 import { TeacherAuthGuard } from './teacher/teacher-auth.guard';
 
 
-
+const appInit = (runtimeConfig: AppRuntimeConfigurationService) => {
+  return () => {
+    return runtimeConfig.loadAppConfig();
+  };
+}
 
 
 @NgModule({
@@ -120,6 +124,8 @@ import { TeacherAuthGuard } from './teacher/teacher-auth.guard';
   providers: [
     TeacherAuthGuard,
     MatSnackBar,
+    AppRuntimeConfigurationService,
+    {provide: APP_INITIALIZER, useFactory: appInit, multi: true, deps: [AppRuntimeConfigurationService]},
     {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},

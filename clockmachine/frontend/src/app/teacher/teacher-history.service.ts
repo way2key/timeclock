@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Network } from '../../assets/metadata/network';
+import { AppRuntimeConfigurationService } from '../app-runtime-config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeacherHistoryService {
-  private apiUrl = Network.clockMachineApi + '/api/teacher-hist';
+  private apiUrl = this.runtimeConfiguration.getConfig().clockMachineApi + '/api/teacher-hist';
   private auth = 'Bearer '+ localStorage.getItem("token");
   private httpOptions = {
     headers: new HttpHeaders({
@@ -16,7 +16,7 @@ export class TeacherHistoryService {
       'Authorization': this.auth
     })
   };
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private runtimeConfiguration: AppRuntimeConfigurationService) { }
 
   getAllLog() {
     const url = this.apiUrl + '/log';
