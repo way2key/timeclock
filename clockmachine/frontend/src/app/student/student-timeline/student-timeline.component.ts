@@ -32,7 +32,7 @@ export class StudentTimelineComponent implements OnInit, OnDestroy {
       var y;
 
       s.setup = () => {
-        s.createCanvas(800,400).parent('p5-sketch');
+        s.createCanvas(600,150).parent('p5-sketch');
         x_start = 0.1*s.width;
         x_end = 0.9*s.width;
         y = 0.8*s.height;
@@ -66,9 +66,9 @@ export class StudentTimelineComponent implements OnInit, OnDestroy {
         let timeline = s.line(x_time,0.85*s.height,x_time,0.34*s.height);
 
         // Timeline Hour
-        s.fill(230);
+        s.fill(0);
         s.noStroke(0);
-        s.textSize(0.05*s.height);
+        s.textSize(0.1*s.height);
         s.textAlign(s.CENTER);
         s.text(this.time.format('HH:mm:ss'), x_time, 0.3*s.height);
 
@@ -80,13 +80,13 @@ export class StudentTimelineComponent implements OnInit, OnDestroy {
         while(r > lowerBound){
           let x = s.map(r,lowerBound,upperBound,x_start,x_end);
           s.stroke(0);
-          s.line(x,y,x,0.82*s.height);
+          s.line(x,y,x,0.85*s.height);
           // Time
           s.noStroke(0);
-          s.fill(230);
-          s.textSize(0.03*s.height);
+          s.fill(0);
+          s.textSize(0.1*s.height);
           s.textAlign(s.CENTER);
-          s.text(r+':00', x, 0.85*s.height);
+          s.text(r+':00', x, 0.94*s.height);
           r--;
         }
 
@@ -100,11 +100,11 @@ export class StudentTimelineComponent implements OnInit, OnDestroy {
         */
 
         // Completed period
-        for(let i=0; i < this.clock.length; i+=2){
+        for(let i=0; i < this.clock.length -1; i+=2){
           s.fill(0,255,0,140);
           s.strokeWeight(3);
           s.stroke(0);
-          s.rect(s.map(this.clock[i],lowerBound,upperBound,x_start,x_end), y, s.map(this.clock[i+1],lowerBound,upperBound,x_start,x_end)-s.map(this.clock[i],lowerBound,upperBound,x_start,x_end), -0.17*s.height);
+          s.rect(s.map(this.clock[i],lowerBound,upperBound,x_start,x_end), y, s.map(this.clock[i+1],lowerBound,upperBound,x_start,x_end)-s.map(this.clock[i],lowerBound,upperBound,x_start,x_end), -0.34*s.height);
         }
 
         // last period
@@ -117,7 +117,7 @@ export class StudentTimelineComponent implements OnInit, OnDestroy {
             s.map(this.clock[index],lowerBound,upperBound,x_start,x_end),
             y,
             s.map(this.time.asHours(),lowerBound,upperBound,x_start,x_end)-s.map(this.clock[index],lowerBound,upperBound,x_start,x_end),
-            -0.17*s.height
+            -0.34*s.height
           );
         }
 

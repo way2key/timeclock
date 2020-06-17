@@ -1,1 +1,18 @@
 @import '../../../styles.scss';
+
+.message {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  background-color: transparent;
+}
+
+span {
+  margin: 1em;
+}
+
+i {
+  font-size: 2em;
+  margin-left: 1em;
+}

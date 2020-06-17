@@ -90,6 +90,6 @@ exports.clockAStudent = (req, res) => {
     () => res.status(200).json("Clock créé avec succès")
   )
   .catch(
-    (error) => res.status(500).json("Erreur de pointage <= " + error)
+    (error) => res.status(500).json(error)
   )
 }
