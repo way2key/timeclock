@@ -34,6 +34,7 @@ exports.createATeacher = (teacher) => {
           firstname: teacher.firstname,
           lastname: teacher.lastname,
           password: cryptedPassword,
+          hash: teacher.firstname+teacher.lastname,
           type: 1
         });
         return usr.save()

@@ -2,7 +2,7 @@
   <h1 class="mainTitle"> Timbreuse Mobile </h1>
   <button *ngIf="infoRequested" class="button is-link is-rounded has-text-white" (click)="info()">Info</button>
   <button *ngIf="!infoRequested" class="button is-info is-rounded has-text-black is-light" (click)="info()">Info</button>
-  <div class="selectField">
+  <div class="cdk-visually-hidden">
       <form [formGroup]="cardForm" (ngSubmit)="readCard()">
         <input autocomplete="off" type="text" id="cardInput"  formControlName="cardNumber" [(ngModel)]="refresh">
       </form>
