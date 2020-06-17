@@ -57,8 +57,8 @@ export class StudentMainComponent implements OnInit {
         sound.play();
       }
     )
-
     let dialogRef = this.dialog.open(StudentInfoComponent,{data: {hash: studentHash}});
+
     dialogRef.afterClosed().subscribe(result => {
       this.selectField();
       console.log('The dialog was closed');
@@ -66,8 +66,8 @@ export class StudentMainComponent implements OnInit {
   }
 
   showMessage(studentHash) {
-    let dialogRef = this.dialog.open(StudentMessageComponent,{data: {hash: studentHash}});
-
+    let dialogRef = this.dialog.open(StudentMessageComponent,{data:{hash: studentHash},role: 'alertdialog',restoreFocus:true});
+    setTimeout(()=>{dialogRef.close()},3000);
     dialogRef.afterClosed().subscribe(result => {
       this.selectField();
     })
