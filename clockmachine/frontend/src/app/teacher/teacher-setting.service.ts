@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Network } from '../../assets/metadata/network';
+import { AppRuntimeConfigurationService } from '../app-runtime-config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeacherSettingService {
-  private teacherUrl = Network.clockMachineApi + '/api/teacher-setting';
-  private adminUrl = Network.adminAPI + '/api/admin-data-week';
+  private teacherUrl = this.runtimeConfiguration.getConfig().clockMachineApi + '/api/teacher-setting';
+  private adminUrl = this.runtimeConfiguration.getConfig().adminAPI + '/api/admin-data-week';
   private auth = 'Bearer '+ localStorage.getItem("token");
   private httpOptions = {
     headers: new HttpHeaders({
@@ -17,7 +17,7 @@ export class TeacherSettingService {
       'Authorization': this.auth
     })
   };
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private runtimeConfiguration: AppRuntimeConfigurationService) { }
 
   updatePassword(password) {
     const url = this.teacherUrl + "/password";
@@ -35,7 +35,7 @@ export class TeacherSettingService {
   }
 
   getSound() {
-    const url = Network.clockMachineApi + "/api/server/sound";
+    const url = this.runtimeConfiguration.getConfig().clockMachineApi + "/api/server/sound";
     return this.http.get<any>(url, this.httpOptions);
   }
 

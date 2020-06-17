@@ -37,7 +37,6 @@ const action = {
   deleteStudent: studentService.deleteStudent,
 
   updatePerformedTime: performedTimeService.updatePerformedTime,
-  updatePerformedTime: performedTimeService.updatePerformedTime,
 
   controlDailyIncident: incidentService.controlDailyIncident,
   controlWeeklyIncident: incidentService.controlWeeklyIncident,
@@ -69,5 +68,4 @@ const action = {
 }
 
 
-performedTimeService.updatePerformedTime();
 module.exports = action;

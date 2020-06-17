@@ -2,7 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { StudentService } from '../student.service';
 import { Howl, Howler } from 'howler';
-import { ClockMachineId } from '../../../assets/metadata/clockmachinetag';
+import { AppRuntimeConfigurationService } from '../../app-runtime-config.service';
+
 
 @Component({
   selector: 'app-student-message',
@@ -13,11 +14,10 @@ export class StudentMessageComponent implements OnInit {
   message;
   status;
   student;
-  clockMachineId="5eac2b3d197357249cc24249";
   sound;
   error;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private studentService: StudentService) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private studentService: StudentService, private runtimeConfiguration: AppRuntimeConfigurationService) { }
 
   ngOnInit() {
     this.getSound();
@@ -74,7 +74,7 @@ export class StudentMessageComponent implements OnInit {
   }
 
   getSound() {
-    this.studentService.getClockMachine(ClockMachineId).subscribe(
+    this.studentService.getClockMachine(this.runtimeConfiguration.getConfig().clockMachineId).subscribe(
       clockMachine => {
         let sound={};
         Object.entries(clockMachine.sound).map(item => {

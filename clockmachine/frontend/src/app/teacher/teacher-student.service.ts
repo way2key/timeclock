@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Network } from '../../assets/metadata/network';
+import { AppRuntimeConfigurationService } from '../app-runtime-config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeacherStudentService {
 
-  private apiUrl = Network.clockMachineApi + '/api/teacher-student';
-  private adminUrl = Network.adminAPI + '/api/admin-data-week';
-  private studentStatusUrl = Network.clockMachineApi + '/api/student';
+  private apiUrl = this.runtimeConfiguration.getConfig().clockMachineApi + '/api/teacher-student';
+  private adminUrl = this.runtimeConfiguration.getConfig().adminAPI + '/api/admin-data-week';
+  private studentStatusUrl = this.runtimeConfiguration.getConfig().clockMachineApi + '/api/student';
   private auth = 'Bearer '+ localStorage.getItem("token");
   private httpOptions = {
     headers: new HttpHeaders({
@@ -18,7 +18,7 @@ export class TeacherStudentService {
       'Authorization': this.auth
     })
   };
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private runtimeConfiguration: AppRuntimeConfigurationService) { }
 
   getAllStudents(): Observable<String[]> {
     return this.http.get<String[]>(this.apiUrl, this.httpOptions);

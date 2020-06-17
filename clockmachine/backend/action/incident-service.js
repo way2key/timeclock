@@ -106,7 +106,7 @@ exports.controlInstantIncident = (studentHash, clockId) => {
       () => resolve("Incidents Immédiats vérifié avec succès")
     )
     .catch(
-      error => reject("Incident ! <= " + error)
+      error => reject("incident immédiat mal configuré <= " + error)
     )
   })
 }
