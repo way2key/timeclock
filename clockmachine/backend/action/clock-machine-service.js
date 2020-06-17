@@ -24,8 +24,15 @@ exports.createClockMachine = (machine) => {
 exports.getClockMachine = (clockMachineId) => {
   return new Promise( (resolve, reject) => {
     ClockMachine.findOne({_id:clockMachineId})
-    .then((machine) => resolve(machine))
-    .catch(error => reject("Unable to fetch ClockMachine from db <= "+error));
+    .then((machine) => {
+      if(machine){
+        resolve(machine);
+      }
+      else {
+        throw "Id de la pointeuse non inséré dans le fichier de configuration";
+      }
+    })
+    .catch(error => reject("Unable to fetch ClockMachine from db <= " + error));
   })
 }
 

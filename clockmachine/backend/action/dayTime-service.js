@@ -13,6 +13,14 @@ exports.getStudentDayTimeFromDayId = (dayId) => {
       clocks => {
         let shifts = [];
         let time = 0;
+        if(clocks.length%2!=0){
+          let t1 = moment.duration(clocks[clocks.length-1].time);
+          let t2 = moment.duration(moment().format("HH:mm:ss"));
+          if(t1 < t2){
+            let uncompletedShift = moment.duration(Math.abs(t1-t2)).asHours();
+            time += uncompletedShift;
+          }
+        }
         for(let i=0; i < clocks.length-1; i+=2){
           let t1 = moment.duration(clocks[i].time);
           let t2 = moment.duration(clocks[i+1].time);

@@ -54,8 +54,11 @@ const io = require('socket.io-client');
 const socket = io.connect(network.adminAPI + "/clockMachine");
 
 socket.on('requestProclamation', () => {
-  action.getClockMachine(clockMachineId).
-  then(
+  action.getClockMachine(clockMachineId)
+  .then(
     machine => socket.emit('proclamation', machine)
+  )
+  .catch(
+    error => console.log("Annonce échouée <= " + error)
   )
 })

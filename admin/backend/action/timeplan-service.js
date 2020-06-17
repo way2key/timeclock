@@ -19,7 +19,7 @@ exports.getTimeplan = () => {
   return new Promise( (resolve, reject) => {
     Timeplan.find()
     .then(timeplan => resolve(timeplan))
-    .catch(error => reject("Unable to fetch Timeplan from db <= " + error));
+    .catch(error => reject("Unable to fetch Timeplans from db <= " + error));
   })
 }
 

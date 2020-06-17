@@ -71,10 +71,13 @@ const allotStudent = io
 const clockMachine = io
 .of('/clockMachine')
 .on('connection', socket => {
-  console.log("Capitaine, une nouvelle pointeuse se pointe !");
+  console.log("Capitaine, une nouvelle pointeuse se pointe:");
+  console.log("# Demande d'annonce...");
+
   clockMachine.emit("requestProclamation");
 
   socket.on('proclamation', machine => {
+    console.log("Capitaine, pointeuse " + machine.title + " !")
     machine['socketId'] = socket.id;
     machine['createdTime'] = socket.handshake.time;
     //machine['url'] = "http://"+socket.handshake.headers.host.split(":")[0]+":4200/teacher/login";
