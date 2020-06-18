@@ -207,7 +207,7 @@ export class TeacherHistStatComponent implements OnInit {
       var y;
 
       s.setup = () => {
-        s.createCanvas(600,300).parent(hash);
+        s.createCanvas(1500,500).parent(hash);
         x_start = 0.1*s.width;
         x_end = 0.9*s.width;
         y = 0.8*s.height;
@@ -248,7 +248,7 @@ export class TeacherHistStatComponent implements OnInit {
           let timeline = s.line(x_time,0.85*s.height,x_time,0.34*s.height);
 
           // Timeline Hour
-          s.fill(230);
+          s.fill(0);
           s.noStroke(0);
           s.textSize(0.05*s.height);
           s.textAlign(s.CENTER);
@@ -266,7 +266,7 @@ export class TeacherHistStatComponent implements OnInit {
           s.line(x,y,x,0.82*s.height);
           // Time
           s.noStroke(0);
-          s.fill(230);
+          s.fill(0);
           s.textSize(0.03*s.height);
           s.textAlign(s.CENTER);
           s.text(r+':00', x, 0.85*s.height);
@@ -278,7 +278,7 @@ export class TeacherHistStatComponent implements OnInit {
           s.fill(0,255,0,140);
           s.strokeWeight(3);
           s.stroke(0);
-          s.rect(s.map(this.clock[i],lowerBound,upperBound,x_start,x_end), y, s.map(this.clock[i+1],lowerBound,upperBound,x_start,x_end)-s.map(this.clock[i],lowerBound,upperBound,x_start,x_end), -0.17*s.height);
+          s.rect(s.map(this.clock[i],lowerBound,upperBound,x_start,x_end), y, s.map(this.clock[i+1],lowerBound,upperBound,x_start,x_end)-s.map(this.clock[i],lowerBound,upperBound,x_start,x_end), -0.20*s.height);
         }
 
         // last period
@@ -291,7 +291,7 @@ export class TeacherHistStatComponent implements OnInit {
             s.map(this.clock[index],lowerBound,upperBound,x_start,x_end),
             y,
             s.map(this.time.asHours(),lowerBound,upperBound,x_start,x_end)-s.map(this.clock[index],lowerBound,upperBound,x_start,x_end),
-            -0.17*s.height
+            -0.20*s.height
           );
         }
 
