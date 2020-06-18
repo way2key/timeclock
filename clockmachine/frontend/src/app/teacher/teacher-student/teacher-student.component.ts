@@ -41,7 +41,7 @@ export class TeacherStudentComponent implements OnInit {
   }
 
   onAll() {
-    if (this.students.every(student =>student.isSelected)){
+    if (this.students.every(student => student.isSelected)){
       this.deselectAll();
       document.getElementById("allButton").innerHTML = "Tout sélectionner";
     } else {
@@ -51,7 +51,7 @@ export class TeacherStudentComponent implements OnInit {
   }
 
   selectAll() {
-    this.students.forEach(student => {
+    this.shownStudents.forEach(student => {
       student.isSelected = true;
     });
     this.disabled = false;
