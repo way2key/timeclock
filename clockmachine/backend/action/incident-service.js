@@ -322,7 +322,7 @@ exports.unallowedPresenceIncident = (student, clockId) => {
             let start = moment.duration(sTimeplan.startOfDay,"HH:mm:ss").asSeconds();
             let end = moment.duration(sTimeplan.endOfDay,"HH:mm:ss").asSeconds();
             let outsideSchedule = ( (time < start) || ( time > end) );
-            let forbiddenDay = (sHoliday.filter(holiday => now.isBetween(moment(holiday.startDate,"YYYY/MM/DD").startOf('day'), moment(holiday.endDate,"YYYY/MM/DD").endOf('day'))).length > 0);
+            let forbiddenDay = (sHoliday.filter(holiday => !holiday.allowPresence && (now.isBetween(moment(holiday.startDate,"YYYY/MM/DD").startOf('day'), moment(holiday.endDate,"YYYY/MM/DD").endOf('day')))).length >= 1);
             if(outsideSchedule || forbiddenDay){
               this.saveNewIncident(student._id, "Présence non Autorisée");
             }
