@@ -90,9 +90,36 @@ exports.controlInstantIncident = (studentHash, clockId) => {
     .then(
       student => {
         let incidentToControl = [];
-        if(setting.lateArrivalNotification){
-          incidentToControl.push(this.latenessArrivalIncident(student, clockId));
-        }
+        let sPresence;
+        let onHoliday;
+        let now = moment();
+        presenceService.checkStudentPresence(student.hash)
+        .then(
+          presence => {
+            sPresence = presence;
+            let holidayUrl = network.adminAPI + '/api/admin-data-holiday/';
+
+            return fetch(holidayUrl);
+          }
+        )
+        .then(
+          res => {
+            return res.json();
+          }
+        )
+        .then(
+          sHoliday => {
+            onHoliday = (sHoliday.filter(holiday => (now.isBetween(moment(holiday.startDate,"YYYY/MM/DD").startOf('day'), moment(holiday.endDate,"YYYY/MM/DD").endOf('day')))).length >= 1)
+          }
+        )
+        .then(
+          () => {
+            if(setting.lateArrivalNotification && !onHoliday){
+              incidentToControl.push(this.latenessArrivalIncident(student, clockId));
+            }
+          }
+        )
+
         if(setting.unallowedPresenceNotification){
           incidentToControl.push(this.unallowedPresenceIncident(student, clockId));
         }
@@ -113,6 +140,7 @@ exports.controlInstantIncident = (studentHash, clockId) => {
 
 exports.controlDailyIncident = () => {
   return new Promise( (resolve, reject) => {
+    let incidentPromises = [];
     let setting;
     clockMachineService.getClockMachine(clockMachineId)
     .then(
@@ -123,17 +151,46 @@ exports.controlDailyIncident = () => {
     )
     .then(
       students => {
+        let sPresence;
+        let onHoliday;
+        let now = moment();
         const studentPromises = students.map(student => {
-          let incidentPromises = [];
-          if(setting.insufficientDayTimeQuotaNotification){
-            incidentPromises.push(this.dailyTimeNotCompletedIncident(student));
-          }
-          if(setting.earlyDepartureNotification){
-            incidentPromises.push(this.hastyDepartureIncident(student));
-          }
-          if(setting.clockingOversightNotification){
-            incidentPromises.push(this.clockOversightIncident(student));
-          }
+          presenceService.checkStudentPresence(student.hash)
+          .then(
+            presence => {
+              sPresence = presence;
+              let holidayUrl = network.adminAPI + '/api/admin-data-holiday/';
+
+              return fetch(holidayUrl);
+            }
+          )
+          .then(
+            res => {
+              return res.json();
+            }
+          )
+          .then(
+            sHoliday => {
+              onHoliday = (sHoliday.filter(holiday => (now.isBetween(moment(holiday.startDate,"YYYY/MM/DD").startOf('day'), moment(holiday.endDate,"YYYY/MM/DD").endOf('day')))).length >= 1)
+            }
+          )
+          .then(
+            () => {
+              if(sPresence && !onHoliday){
+                if(setting.insufficientDayTimeQuotaNotification){
+                  incidentPromises.push(this.dailyTimeNotCompletedIncident(student));
+                }
+                if(setting.earlyDepartureNotification){
+                  incidentPromises.push(this.hastyDepartureIncident(student));
+                }
+                if(setting.clockingOversightNotification){
+                  incidentPromises.push(this.clockOversightIncident(student));
+                }
+              }
+            }
+          )
+
+
           return Promise.all(incidentPromises);
         });
         return Promise.all(studentPromises);
@@ -160,11 +217,39 @@ exports.controlWeeklyIncident = () => {
     )
     .then(
       students => {
+        let sPresence;
+        let onHoliday;
+        let now = moment();
+
         const studentPromises = students.map(student => {
           let incidentPromises = [];
-          if(setting.insufficientWeekTimeQuotaNotification){
-            incidentPromises.push(this.quotaTimeIncident(student));
-          }
+          presenceService.checkStudentPresence(student.hash)
+          .then(
+            presence => {
+              sPresence = presence;
+              let holidayUrl = network.adminAPI + '/api/admin-data-holiday/';
+
+              return fetch(holidayUrl);
+            }
+          )
+          .then(
+            res => {
+              return res.json();
+            }
+          )
+          .then(
+            sHoliday => {
+              onHoliday = (sHoliday.filter(holiday => (now.isBetween(moment(holiday.startDate,"YYYY/MM/DD").startOf('day'), moment(holiday.endDate,"YYYY/MM/DD").endOf('day')))).length >= 1)
+            }
+          )
+          .then(
+            () => {
+              if(setting.insufficientWeekTimeQuotaNotification && !onHoliday){
+                incidentPromises.push(this.quotaTimeIncident(student));
+              }
+            }
+          )
+
           return Promise.all(incidentPromises);
         });
         return Promise.all(studentPromises);
@@ -266,36 +351,45 @@ exports.unallowedPresenceIncident = (student, clockId) => {
         .then(res => res.json())
         .then(
           week => {
-            switch (moment().day()) {
-              case 0:
-              timeplanId = week.sunday;
-              break;
-              case 1:
-              timeplanId = week.monday;
-              break;
-              case 2:
-              timeplanId = week.tuesday;
-              break;
-              case 3:
-              timeplanId = week.wednesday;
-              break;
-              case 4:
-              timeplanId = week.thursday;
-              break;
-              case 5:
-              timeplanId = week.friday;
-              break;
-              case 6:
-              timeplanId = week.saturday;
+            if(week != undefined) {
+              switch (moment().day()) {
+                case 0:
+                timeplanId = week.sunday;
+                break;
+                case 1:
+                timeplanId = week.monday;
+                break;
+                case 2:
+                timeplanId = week.tuesday;
+                break;
+                case 3:
+                timeplanId = week.wednesday;
+                break;
+                case 4:
+                timeplanId = week.thursday;
+                break;
+                case 5:
+                timeplanId = week.friday;
+                break;
+                case 6:
+                timeplanId = week.saturday;
+              }
+              let url2 = network.adminAPI + '/api/admin-data-timeplan/timeplan/' + timeplanId;
+              return fetch(url2);
+            } else {
+              reject('Pas de semaine configuré');
             }
-            let url2 = network.adminAPI + '/api/admin-data-timeplan/timeplan/' + timeplanId;
-            return fetch(url2);
           }
         )
         .then(res => res.json())
         .then(timeplan => {
-          sTimeplan = timeplan;
-          resolve();
+          if(timeplan != undefined){
+            sTimeplan = timeplan;
+            resolve();
+          } else {
+            reject("Pas d'horaire configuré");
+          }
+
         })
         .catch(error => reject("Impossible de récupérer l'horaire <= " + error))
       });
@@ -322,7 +416,7 @@ exports.unallowedPresenceIncident = (student, clockId) => {
             let start = moment.duration(sTimeplan.startOfDay,"HH:mm:ss").asSeconds();
             let end = moment.duration(sTimeplan.endOfDay,"HH:mm:ss").asSeconds();
             let outsideSchedule = ( (time < start) || ( time > end) );
-            let forbiddenDay = (sHoliday.filter(holiday => now.isBetween(moment(holiday.startDate,"YYYY/MM/DD").startOf('day'), moment(holiday.endDate,"YYYY/MM/DD").endOf('day'))).length > 0);
+            let forbiddenDay = (sHoliday.filter(holiday => !holiday.allowPresence && (now.isBetween(moment(holiday.startDate,"YYYY/MM/DD").startOf('day'), moment(holiday.endDate,"YYYY/MM/DD").endOf('day')))).length >= 1);
             if(outsideSchedule || forbiddenDay){
               this.saveNewIncident(student._id, "Présence non Autorisée");
             }
@@ -338,6 +432,8 @@ exports.unallowedPresenceIncident = (student, clockId) => {
 exports.dailyTimeNotCompletedIncident = student => {
     return new Promise( (resolve,reject) => {
       let sTimeplan;
+      let sHoliday;
+      let now = moment();
 
       let weekUrl = network.adminAPI + '/api/admin-data-week/' + student.weekId;
       fetch(weekUrl)
@@ -379,7 +475,7 @@ exports.dailyTimeNotCompletedIncident = student => {
       .then(
         time => {
           //Control
-          if(false){
+          if(true){
             if(time < sTimeplan.requiredTime){
               this.saveNewIncident(student._id, "Temps quotidien insuffisant");
             }
@@ -397,6 +493,20 @@ exports.hastyDepartureIncident = student => {
     return new Promise( (resolve,reject) => {
       let sTimeplan;
       let weekUrl = network.adminAPI + '/api/admin-data-week/' + student.weekId;
+      /*let sHoliday;
+      let now = moment();
+
+      //getHoliday
+      let getHoliday = new Promise( (resolve, reject) => {
+        let holidayUrl = network.adminAPI + '/api/admin-data-holiday/';
+        fetch(holidayUrl)
+        .then(res => res.json())
+        .then(holiday => {
+          sHoliday = holiday;
+          resolve();
+        })
+        .catch(error => reject("Impossible de récupérer les jours fériés <= " + error))
+      })*/
       fetch(weekUrl)
       .then(res => res.json())
       .then(
@@ -435,9 +545,9 @@ exports.hastyDepartureIncident = student => {
       )
       .then(
         clocks => {
-          if(clocks.length && sTimeplan.shift){
+          if(clocks.length && sTimeplan.shift/* && !(sHoliday.filter(holiday => !holiday.allowPresence && (now.isBetween(moment(holiday.startDate,"YYYY/MM/DD").startOf('day'), moment(holiday.endDate,"YYYY/MM/DD").endOf('day')))).length >= 1)*/){
             if(moment.duration(clocks[clocks.length - 1].time).as('seconds') < moment.duration(sTimeplan.shift[sTimeplan.shift.length-1].end).as('seconds')) {
-              this.saveNewIncident(studentId, "Départ en avance");
+              this.saveNewIncident(student._id, "Départ en avance");
             }
           }
           resolve();
