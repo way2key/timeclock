@@ -25,7 +25,7 @@ exports.getTimeplan = () => {
 
 exports.getATimeplan = (timeplanId) => {
   return new Promise( (resolve, reject) => {
-    Timeplan.findOne({_id: timeplanId})
+    Timeplan.findById(timeplanId)
     .then(timeplan => resolve(timeplan))
     .catch(error => reject("Unable to fetch Timeplan from db <= " + error));
   })

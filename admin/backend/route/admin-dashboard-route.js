@@ -6,6 +6,5 @@ const adminDashboardController = require('../controller/admin-dashboard-controll
 
 //Routes
 router.get('/admin', auth, adminDashboardController.getAnAdmin);
-router.post('/machine', adminDashboardController.welcomeAMachine);
 
 module.exports = router;
