@@ -3,7 +3,7 @@ const fs = require('fs');
 exports.getSound = () => {
   return new Promise( (resolve, reject) => {
     try{
-      sounds = fs.readdirSync('../frontend/src/assets/sound');
+      sounds = fs.readdirSync('/usr/share/nginx/html/pointeuse/assets/sound');
       resolve(sounds);
     }
     catch{
