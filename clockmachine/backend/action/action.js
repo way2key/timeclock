@@ -37,6 +37,7 @@ const action = {
   deleteStudent: studentService.deleteStudent,
 
   updatePerformedTime: performedTimeService.updatePerformedTime,
+  updatePerformedTimeToAll: performedTimeService.updatePerformedTimeToAll,
 
   controlDailyIncident: incidentService.controlDailyIncident,
   controlWeeklyIncident: incidentService.controlWeeklyIncident,

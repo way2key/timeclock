@@ -7,58 +7,62 @@ const Day = require('../data-schematic/day-schematic');
 const Clock = require('../data-schematic/clock-schematic');
 const User = require('../data-schematic/user-schematic');
 
-exports.updatePerformedTime = () => {
+exports.updatePerformedTimeToAll = () => {
   User.find({type:0})
   .then(
     users => {
-      for(let user of users){
-        clockService.getStudentClockFromHash(user.hash)
-        .then(
-          clocks => {
-            let time = 0;
-            if(clocks.length%2!=0){
-              let t1 = moment.duration(clocks[clocks.length-1].time);
-              let t2 = moment.duration("16:00:00");
-              if(t1 < t2){
-                let uncompletedShift = moment.duration(Math.abs(t1-t2)).asHours();
-                time += uncompletedShift;
+      const clockPromise = [];
+      users.map( u => {
+        clockPromise.push(
+          clockService.getStudentClockFromHash(u.hash)
+          .then(
+            clocks => {
+              let time = 0;
+              if(clocks.length%2!=0){
+                let t1 = moment.duration(clocks[clocks.length-1].time);
+                let t2 = moment.duration("16:00:00");
+                if(t1 < t2){
+                  let uncompletedShift = moment.duration(Math.abs(t1-t2)).asHours();
+                  time += uncompletedShift;
+                }
               }
-            }
-            let shifts = [];
-            for(let i=0; i < clocks.length-1; i+=2){
-              let t1 = moment.duration(clocks[i].time);
-              let t2 = moment.duration(clocks[i+1].time);
-
-              let completedShift = moment.duration(Math.abs(t1-t2)).asHours();
-              shift = {in:t1.asHours(),out:t2.asHours()};
-              shifts.push(shift);
-              time += completedShift;
-            }
-            /*
-            if(shifts.length){
-              if(!breakPerformedInInterval(shifts,11,14,0.5)){
-                console.log("Il n'a pas mangé.");
-                time-=0.5;
+              let shifts = [];
+              for(let i=0; i < clocks.length-1; i+=2){
+                let t1 = moment.duration(clocks[i].time);
+                let t2 = moment.duration(clocks[i+1].time);
+                  let completedShift = moment.duration(Math.abs(t1-t2)).asHours();
+                shift = {in:t1.asHours(),out:t2.asHours()};
+                shifts.push(shift);
+                time += completedShift;
               }
-              time -= breakPerformed(shifts)/3;
-              console.log("Le temps de " + user.firstname + " est de : " + time);
-              console.log("END");
-              console.log("");
+              return this.updatePerformedTime(time, u.hash);
+                /*
+                if(shifts.length){
+                  if(!breakPerformedInInterval(shifts,11,14,0.5)){
+                    console.log("Il n'a pas mangé.");
+                    time-=0.5;
+                  }
+                  time -= breakPerformed(shifts)/3;
+                  console.log("Le temps de " + user.firstname + " est de : " + time);
+                  console.log("END");
+                  console.log("");
+}*/
             }
-*/
-          }
+          )
         )
-        .catch(
-          error => console.log("Impossible de comptabiliser le temps <= " + error)
-        )
-      }
+      });
+      return Promise.all(clockPromise);
     }
+  )
+  .catch(
+    error => console.log("Impossible de mettre à jour le temps de tout le monde <= " + error)
   )
 }
 
+
 exports.updatePerformedTime =  (time, studentHash) => {
-  return new Promise( (resolve, reject) => {
-    User.findOneAndUpdate({type:0, hash:studentHash},{$inc:{performedTime: time}})
+  return User.findOneAndUpdate({type:0, hash:studentHash},{$inc:{performedTime: time}});
+  /*return new Promise( (resolve, reject) => {
     .then(
       student => {
         if(!student){
@@ -67,7 +71,10 @@ exports.updatePerformedTime =  (time, studentHash) => {
         resolve("Temps modifié avec succès");
       }
     )
-  });
+    .catch(
+      error => reject(error)
+    )
+  });*/
 }
 
 
