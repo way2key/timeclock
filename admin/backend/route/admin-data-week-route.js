@@ -5,9 +5,9 @@ const auth = require('../middleware/auth');
 const adminDataWeekController = require('../controller/admin-data-week-controller');
 
 //Routes
-router.post('/', auth, adminDataWeekController.createWeek);
 router.get('/', auth, adminDataWeekController.getAllWeeks);
 router.get('/:weekId', adminDataWeekController.getAWeek);
+router.post('/', auth, adminDataWeekController.createWeek);
 router.delete('/:weekId', auth, adminDataWeekController.deleteWeek);
 
 module.exports = router;

@@ -26,7 +26,7 @@ exports.getATimeplan = (req, res) => {
     timeplan => res.status(200).json(timeplan)
   )
   .catch(
-    error => res.status(500).json("Impossible to fetch the timeplan " + timeplanId + " :( <= " + error)
+    error => res.status(500).json("Impossible to fetch the timeplan " + req.params.timeplanId + " :( <= " + error)
   )
 }
 

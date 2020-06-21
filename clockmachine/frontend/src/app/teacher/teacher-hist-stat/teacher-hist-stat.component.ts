@@ -15,6 +15,7 @@ import * as moment from 'moment/moment';
 })
 export class TeacherHistStatComponent implements OnInit {
   students = [];
+  availableDate = ['2020-06-18','2020-06-17','2020-06-16'];
   options;
   shownStudents = [];
   sortCriteria = new FormControl('alphabetical');
@@ -26,10 +27,10 @@ export class TeacherHistStatComponent implements OnInit {
   clock = [];
   clocksExist = true;
   date = new FormControl(moment());
+
   calendarFilter = (d: moment.Moment): boolean => {
-    const day = d.day();
-    // Prevent Saturday and Sunday from being selected.
-    return d <= moment() && day !== 0;
+    return d.day()!==0 && d <= moment()
+    //return this.availableDate.includes(d.format('YYYY-MM-DD'));
   }
 
   constructor(private teacherStudentService: TeacherStudentService,
@@ -168,10 +169,9 @@ export class TeacherHistStatComponent implements OnInit {
       date:  this.date.value.format('YYYY/MM/DD'),
     }
 
-    this.teacherHistoryService.getStudentClocksSpecificDay(payload).subscribe(
+    this.teacherHistoryService.getStudentClocksSpecificDay(payload)
+    .subscribe(
       clocks => {
-        console.log(clocks);
-
         this.clocksExist = true;
         this.clock = clocks;
         this.drawTimeLine(hash);
@@ -183,7 +183,8 @@ export class TeacherHistStatComponent implements OnInit {
       }
     )
 
-    this.teacherHistoryService.getStudentDayTime(payload).subscribe(
+    this.teacherHistoryService.getStudentDayTime(payload)
+    .subscribe(
       time => {
         this.dayPerformedTime = time;
       },
