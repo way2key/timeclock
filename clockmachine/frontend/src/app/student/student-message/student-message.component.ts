@@ -78,7 +78,7 @@ export class StudentMessageComponent implements OnInit {
       clockMachine => {
         let sound={};
         Object.entries(clockMachine.sound).map(item => {
-          let path = "../../../assets/sound/"+item[1];
+          let path = "./assets/sound/"+item[1];
            sound[item[0]] = new Howl({
             src: [path]
           });
