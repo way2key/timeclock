@@ -351,36 +351,45 @@ exports.unallowedPresenceIncident = (student, clockId) => {
         .then(res => res.json())
         .then(
           week => {
-            switch (moment().day()) {
-              case 0:
-              timeplanId = week.sunday;
-              break;
-              case 1:
-              timeplanId = week.monday;
-              break;
-              case 2:
-              timeplanId = week.tuesday;
-              break;
-              case 3:
-              timeplanId = week.wednesday;
-              break;
-              case 4:
-              timeplanId = week.thursday;
-              break;
-              case 5:
-              timeplanId = week.friday;
-              break;
-              case 6:
-              timeplanId = week.saturday;
+            if(week != undefined) {
+              switch (moment().day()) {
+                case 0:
+                timeplanId = week.sunday;
+                break;
+                case 1:
+                timeplanId = week.monday;
+                break;
+                case 2:
+                timeplanId = week.tuesday;
+                break;
+                case 3:
+                timeplanId = week.wednesday;
+                break;
+                case 4:
+                timeplanId = week.thursday;
+                break;
+                case 5:
+                timeplanId = week.friday;
+                break;
+                case 6:
+                timeplanId = week.saturday;
+              }
+              let url2 = network.adminAPI + '/api/admin-data-timeplan/timeplan/' + timeplanId;
+              return fetch(url2);
+            } else {
+              reject('Pas de semaine configuré');
             }
-            let url2 = network.adminAPI + '/api/admin-data-timeplan/timeplan/' + timeplanId;
-            return fetch(url2);
           }
         )
         .then(res => res.json())
         .then(timeplan => {
-          sTimeplan = timeplan;
-          resolve();
+          if(timeplan != undefined){
+            sTimeplan = timeplan;
+            resolve();
+          } else {
+            reject("Pas d'horaire configuré");
+          }
+
         })
         .catch(error => reject("Impossible de récupérer l'horaire <= " + error))
       });
@@ -425,19 +434,7 @@ exports.dailyTimeNotCompletedIncident = student => {
       let sTimeplan;
       let sHoliday;
       let now = moment();
-/*
-      //getHoliday
-      let getHoliday = new Promise( (resolve, reject) => {
-        let holidayUrl = network.adminAPI + '/api/admin-data-holiday/';
-        fetch(holidayUrl)
-        .then(res => res.json())
-        .then(holiday => {
-          sHoliday = holiday;
-          resolve();
-        })
-        .catch(error => reject("Impossible de récupérer les jours fériés <= " + error))
-      })
-*/
+
       let weekUrl = network.adminAPI + '/api/admin-data-week/' + student.weekId;
       fetch(weekUrl)
       .then(res => res.json())
@@ -478,7 +475,7 @@ exports.dailyTimeNotCompletedIncident = student => {
       .then(
         time => {
           //Control
-          if(/*!(sHoliday.filter(holiday => !holiday.allowPresence && (now.isBetween(moment(holiday.startDate,"YYYY/MM/DD").startOf('day'), moment(holiday.endDate,"YYYY/MM/DD").endOf('day')))).length >= 1)*/true){
+          if(true){
             if(time < sTimeplan.requiredTime){
               this.saveNewIncident(student._id, "Temps quotidien insuffisant");
             }
