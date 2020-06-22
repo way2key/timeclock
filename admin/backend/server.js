@@ -74,15 +74,16 @@ const clockMachine = io
   console.log("Capitaine, une nouvelle pointeuse se pointe:");
   console.log("# Demande d'annonce...");
 
-  clockMachine.emit("requestProclamation");
+  socket.emit("requestProclamation");
 
   socket.on('proclamation', machine => {
     console.log("Capitaine, pointeuse " + machine.title + " !")
     machine['socketId'] = socket.id;
     machine['createdTime'] = socket.handshake.time;
-    //machine['url'] = "http://"+socket.handshake.headers.host.split(":")[0]+":4200/teacher/login";
     machine['url'] = "http://"+socket.conn.remoteAddress.split(":")[3];
-    clockMachines.push(machine);
+    if(clockMachines.filter(cm => cm.title == machine.title) == 0){
+      clockMachines.push(machine);
+    }
     dashboard.emit("newClockMachine", machine);
   })
 
