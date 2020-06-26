@@ -1,9 +1,9 @@
-<div *ngIf="message==0">
+<div *ngIf="message==0 && loaded">
   <h1>Utilisateur inexistant</h1>
   <i class="fas fa-bug"></i>
 </div>
 
-<div *ngIf="message==1">
+<div *ngIf="message==1 && loaded">
   <div mat-dialog-content>
     <div class="student">
       <h1 class="title">{{ student.firstname }} {{ student.lastname }}</h1>
