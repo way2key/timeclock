@@ -1,5 +1,5 @@
 let express = require('express');
 
-const clockMachineId = '5ee9d67b464aa321a01bdd5f';
+const clockMachineId = '5ef48dc4d5381b092c1bb9a2';
 
 module.exports = clockMachineId;

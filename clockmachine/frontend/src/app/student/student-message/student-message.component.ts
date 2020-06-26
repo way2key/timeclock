@@ -16,6 +16,7 @@ export class StudentMessageComponent implements OnInit {
   student;
   sound;
   error;
+  loaded=false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private studentService: StudentService, private runtimeConfiguration: AppRuntimeConfigurationService) { }
 
@@ -44,6 +45,7 @@ export class StudentMessageComponent implements OnInit {
           this.status = false;
           this.sound.clockOff.play();
         }
+        this.loaded = true;
       }
     )
     .catch(

@@ -16,10 +16,11 @@ export class StudentInfoComponent implements OnInit {
     status = null;
     dayTime = null;
     student = {
-    break: true,
-    firstname: "Olivier",
-    lastname: "Dancona",
-  }
+      break: true,
+      firstname: "Olivier",
+      lastname: "Dancona",
+    }
+    loaded = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private studentService: StudentService) { }
 
@@ -35,6 +36,7 @@ export class StudentInfoComponent implements OnInit {
     this.studentService.getStudentStatus(studentHash).subscribe(
       status => {
         this.status = status;
+        this.loaded = true;
       },
       error => {
         console.log(error.message);

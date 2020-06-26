@@ -58,10 +58,9 @@ export class StudentMainComponent implements OnInit {
       }
     )
     let dialogRef = this.dialog.open(StudentInfoComponent,{data: {hash: studentHash}});
-
+    setTimeout(()=>{dialogRef.close()},7000);
     dialogRef.afterClosed().subscribe(result => {
       this.selectField();
-      console.log('The dialog was closed');
     })
   }
 

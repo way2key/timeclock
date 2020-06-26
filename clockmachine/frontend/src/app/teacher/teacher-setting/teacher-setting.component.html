@@ -28,7 +28,7 @@
     </div>
   </div>
 
-  <div class="tile is-4 is-vertical is-parent">
+  <div class="tile is-6 is-vertical is-parent">
     <div class="tile is-child box">
       <div class="timeplan">
         <p class="title">Horaire par défaut📅</p>
@@ -48,17 +48,6 @@
         <p>Réglez le volume de la timbreuse</p>
         <mat-slider class="slider" [(ngModel)] ="clockMachine.volume" thumbLabel (change)="updateClockMachineVolume()">
         </mat-slider>
-      </div>
-    </div>
-  </div>
-
-  <div class="tile is-2 is-parent">
-    <div class="tile is-child box">
-      <p class="title">Danger Zone💣</p>
-      <div class="dangerButton">
-        <button type="button" class="button is-danger" style="width:50%" (click)="deleteLog()">Logs</button>
-        <br>
-        <button type="button" class="button is-danger" style="width:50%" (click)="deleteIncident()">Incidents</button>
       </div>
     </div>
   </div>
@@ -141,7 +130,12 @@
   </div>
   <div class="tile is-parent">
     <div class="tile is-child box">
-      <p class="title">Personnalisation🌈</p>
+      <p class="title">Danger Zone💣</p>
+      <div class="dangerButton">
+        <button type="button" class="button is-danger" style="width:50%" (click)="deleteLog()">Logs</button>
+        <br>
+        <button type="button" class="button is-danger" style="width:50%" (click)="deleteIncident()">Incidents</button>
+      </div>
     </div>
   </div>
 </div>

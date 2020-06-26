@@ -1,1 +1,11 @@
 @import '../../../styles.scss';
+.text {
+  font-size: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 150%;
+  margin:1em;
+  color: $blackOlive;
+  text-align: justify;
+}

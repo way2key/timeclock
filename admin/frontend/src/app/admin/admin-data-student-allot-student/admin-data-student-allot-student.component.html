@@ -39,7 +39,7 @@
         </div>
         <div class="machineStudent">
           <div class="student" *ngFor="let s of students">
-            <h1 *ngIf="s.clockMachine==cm._id">{{s.firstname}} {{s.lastname}}</h1>
+            <h1 *ngIf="s.clockMachine==cm._id" class="studentText">{{s.firstname}} {{s.lastname}}</h1>
           </div>
         </div>
       </div>
