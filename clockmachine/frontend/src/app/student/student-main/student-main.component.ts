@@ -31,6 +31,7 @@ export class StudentMainComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectField();
+    this.getSound();
   }
 
   public info(): void{
@@ -70,7 +71,6 @@ export class StudentMainComponent implements OnInit {
   }
 
   showMessage(studentHash) {
-    this.getSound();
     this.clock(studentHash)
     .then(
       () => {
@@ -94,23 +94,26 @@ export class StudentMainComponent implements OnInit {
           this.status = false;
           this.sound.clockOff.play();
         }
-        let dialogRef = this.dialog.open(StudentMessageComponent,{data:{message: this.msg, status: this.stat, student: this.std, error: this.err},role: 'alertdialog',restoreFocus:true});
-        setTimeout(()=>{dialogRef.close()},3000);
-        dialogRef.afterClosed().subscribe(result => {
-          this.selectField();
-        })
-
+        this.launchDialog(this.msg,this.stat,this.std,this.err);
       }
     )
     .catch(
       error => {
-        this.message = 0;
+        this.msg = 0;
         this.err = error;
         this.sound.error.play();
+        this.launchDialog(this.msg,this.stat,this.std,this.err);
       }
     )
   }
 
+  launchDialog(msg, stat, std, err) {
+    let dialogRef = this.dialog.open(StudentMessageComponent,{data:{message: msg, status: stat, student: std, error: err},role: 'alertdialog',restoreFocus:true});
+    setTimeout(()=>{dialogRef.close()},3000);
+    dialogRef.afterClosed().subscribe(result => {
+      this.selectField();
+    })
+  }
   selectField() {
     document.getElementById("cardInput").focus();
   }
