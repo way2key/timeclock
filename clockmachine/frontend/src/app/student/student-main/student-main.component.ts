@@ -20,6 +20,11 @@ export class StudentMainComponent implements OnInit {
     password: new FormControl(''),
   });
   refresh="";
+  sound;
+  private msg = 0;
+  private std = {};
+  private stat = false;
+  private err = "";
 
 
   constructor(public dialog: MatDialog, private studentService: StudentService, private runtimeConfiguration: AppRuntimeConfigurationService) { }
@@ -65,15 +70,101 @@ export class StudentMainComponent implements OnInit {
   }
 
   showMessage(studentHash) {
-    let dialogRef = this.dialog.open(StudentMessageComponent,{data:{hash: studentHash},role: 'alertdialog',restoreFocus:true});
-    setTimeout(()=>{dialogRef.close()},3000);
-    dialogRef.afterClosed().subscribe(result => {
-      this.selectField();
-    })
+    this.getSound();
+    this.clock(studentHash)
+    .then(
+      () => {
+        return this.getStudent(studentHash)
+      }
+    )
+    .then(
+      student => {
+        this.std = student;
+        this.msg = 1;
+        return this.getStatus(studentHash);
+      }
+    )
+    .then(
+      status => {
+        this.stat = status;
+        if(status){
+          this.status = true;
+          this.sound.clockIn.play();
+        } else {
+          this.status = false;
+          this.sound.clockOff.play();
+        }
+        let dialogRef = this.dialog.open(StudentMessageComponent,{data:{message: this.msg, status: this.stat, student: this.std, error: this.err},role: 'alertdialog',restoreFocus:true});
+        setTimeout(()=>{dialogRef.close()},3000);
+        dialogRef.afterClosed().subscribe(result => {
+          this.selectField();
+        })
+
+      }
+    )
+    .catch(
+      error => {
+        this.message = 0;
+        this.err = error;
+        this.sound.error.play();
+      }
+    )
   }
 
   selectField() {
     document.getElementById("cardInput").focus();
   }
+
+  getSound() {
+    this.studentService.getClockMachine(this.runtimeConfiguration.getConfig().clockMachineId).subscribe(
+      clockMachine => {
+        let sound={};
+        Object.entries(clockMachine.sound).map(item => {
+          let path = "./assets/sound/"+item[1];
+           sound[item[0]] = new Howl({
+            src: [path]
+          });
+        });
+        this.sound = sound;
+
+        Howler.volume(clockMachine.volume/100);
+      }
+    )
+  }
+
+  clock(studentHash) {
+    return new Promise( (resolve, reject) => {
+      this.studentService.clockAStudent(studentHash).subscribe(
+        data => {
+          console.log('success: ', data);
+          resolve(data);
+        },
+        error => {
+          console.log('error: ', error);
+          reject(error);
+        }
+      )
+    });
+  }
+
+  getStatus(studentHash) {
+    return new Promise( (resolve, reject) => {
+      this.studentService.getStudentStatus(studentHash).subscribe(
+        status => resolve(status),
+        error => reject(error)
+      )
+    })
+  }
+
+  getStudent(studentHash) {
+    return new Promise( (resolve, reject) => {
+      this.studentService.getStudentInfo(studentHash).subscribe(
+        student => resolve(student),
+        error => reject(error)
+      )
+    })
+  }
+
+
 
 }
